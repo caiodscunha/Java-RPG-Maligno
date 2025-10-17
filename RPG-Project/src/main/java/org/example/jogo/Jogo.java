@@ -1,12 +1,18 @@
-package org.example;
+package org.example.jogo;
 
-import java.util.InputMismatchException;
+import org.example.players.Arqueiro;
+import org.example.players.Guerreiro;
+import org.example.players.Mago;
+import org.example.models.Personagem;
+
 import java.util.Scanner;
 
 public class Jogo {
     static Scanner scanner =  new Scanner(System.in);
 
     static Personagem jogador;
+
+    private static boolean isRunning = false;
 
     //Metodo estático para printar opções e ler a selecionada
     public static int readInt(String prompt, int userChoices) {
@@ -48,9 +54,41 @@ public class Jogo {
 
     }
 
-    public static void anithingToContinue(){
+    public static void anythingToContinue(){
         System.out.print("Aperte qualquer coisa para continuar...");
         scanner.nextLine();
+    }
+
+    public static void mainMenu(){
+        int input = 0;
+
+        while(input != 3){
+            clearConsole();
+            printSeparator(40);
+            System.out.println("N O M E   D O   J O G O");
+            System.out.println("\nCriadoares: ");
+            System.out.println("\tCaio Cunha\n\tGuilherme Piovezan");
+            printSeparator(40);
+
+            System.out.println("(1) Nova Jornada");
+            System.out.println("(2) Carregar Save");
+            System.out.println("(3) Sair");
+
+            input = readInt("->", 3);
+            scanner.nextLine();
+
+            switch (input){
+                case 1 -> startGame();
+                case 2 -> loadSave();
+                default -> System.out.println("Saindo...");
+            }
+        }
+
+
+    }
+
+    private static void loadSave() {
+
     }
 
     public static void startGame(){
@@ -58,16 +96,6 @@ public class Jogo {
         String nome;
 
         int input;
-
-        clearConsole();
-        printSeparator(40);
-        System.out.println("N O M E   D O   J O G O");
-        System.out.println("\nCriadoares: ");
-        System.out.println("\tCaio Cunha\n\tGuilherme Piovezan");
-        printSeparator(40);
-
-        anithingToContinue();
-        clearConsole();
 
         do {
             printHeading("Qual é seu nome?");
@@ -99,8 +127,45 @@ public class Jogo {
         }else{
             jogador = new Mago(nome);
         }
-
+        scanner.nextLine();
         clearConsole();
 
+        Historia.printIntro();
+        clearConsole();
+        isRunning = true;
+        gameLoop();
     }
+
+    private static void continueJourney() {
+
+    }
+
+    private static void printMenu() {
+        clearConsole();
+
+        printHeading("M E N U");
+
+        System.out.println("(1) Explorar");
+        System.out.println("(2) Usar itens");
+        System.out.println("(3) Salvar e Sair");
+
+    }
+
+    public static void gameLoop(){
+        while(isRunning){
+            printMenu();
+            int input = readInt("->", 3);
+            switch (input) {
+                case 1 -> continueJourney();
+                case 2 -> continueJourney();//usar itens;
+                case 3 -> isRunning = false;
+            }
+            if (input == 1) {
+                continueJourney();
+            }
+
+        }
+    }
+
+
 }

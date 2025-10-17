@@ -1,6 +1,6 @@
-package org.example;
+package org.example.models;
 
-public class Inimigo extends Personagem{
+public class Inimigo extends Personagem {
 
     public Inimigo(String nome, int maxPontosVida, int nivel, int defensa, int ataque, Inventario inventario) {
         super(nome, maxPontosVida, nivel);

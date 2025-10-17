@@ -1,6 +1,9 @@
-package org.example;
+package org.example.players;
 
-public class Mago extends Personagem{
+import org.example.models.Inventario;
+import org.example.models.Personagem;
+
+public class Mago extends Personagem {
 
     public Mago(String nome) {
         super(nome, 50, 1);

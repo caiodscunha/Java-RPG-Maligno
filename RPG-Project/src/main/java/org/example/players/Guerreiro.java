@@ -1,6 +1,9 @@
-package org.example;
+package org.example.players;
 
-public class Guerreiro extends Personagem{
+import org.example.models.Inventario;
+import org.example.models.Personagem;
+
+public class Guerreiro extends Personagem {
 
 
     public Guerreiro(String nome) {
