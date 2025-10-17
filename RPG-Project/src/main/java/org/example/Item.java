@@ -5,5 +5,6 @@ public class Item {
     private String descricao;
     private Efeito efeito;
     private int quantidade;
-    
+
+
 }
