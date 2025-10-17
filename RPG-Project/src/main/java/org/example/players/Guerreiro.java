@@ -14,5 +14,8 @@ public class Guerreiro extends Personagem {
         this.inventario = new Inventario();
     }
 
-
+    @Override
+    public String toString() {
+        return "Guerreiro" + super.toString();
+    }
 }

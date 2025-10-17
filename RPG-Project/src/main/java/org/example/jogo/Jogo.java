@@ -5,6 +5,7 @@ import org.example.players.Guerreiro;
 import org.example.players.Mago;
 import org.example.models.Personagem;
 
+import java.io.Console;
 import java.util.Scanner;
 
 public class Jogo {
@@ -13,6 +14,9 @@ public class Jogo {
     static Personagem jogador;
 
     private static boolean isRunning = false;
+
+    private static int gameAct = 1;
+    private static int gameCicle = 0;
 
     //Metodo estático para printar opções e ler a selecionada
     public static int readInt(String prompt, int userChoices) {
@@ -118,7 +122,7 @@ public class Jogo {
 
 
         printHeading("Escolha Sua Classe:");
-        input = readInt("(1)Guerreiro.\n(2)Arqueiro\n(3)Mago\n->", 2);
+        input = readInt("(1)Guerreiro.\n(2)Arqueiro\n(3)Mago\n->", 3);
 
         if (input == 1) {
             jogador = new Guerreiro(nome);
@@ -144,6 +148,8 @@ public class Jogo {
         clearConsole();
 
         printHeading("M E N U");
+        System.out.println(jogador);
+        printSeparator(10);
 
         System.out.println("(1) Explorar");
         System.out.println("(2) Usar itens");
@@ -159,9 +165,6 @@ public class Jogo {
                 case 1 -> continueJourney();
                 case 2 -> continueJourney();//usar itens;
                 case 3 -> isRunning = false;
-            }
-            if (input == 1) {
-                continueJourney();
             }
 
         }

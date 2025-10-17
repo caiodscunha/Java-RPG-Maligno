@@ -13,4 +13,9 @@ public class Arqueiro extends Personagem {
         this.defensa = 8;
         this.inventario = new Inventario();
     }
+
+    @Override
+    public String toString() {
+        return "Arqueiro" + super.toString();
+    }
 }

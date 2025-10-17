@@ -12,4 +12,9 @@ public class Mago extends Personagem {
         this.defensa = 7;
         this.inventario = new Inventario();
     }
+
+    @Override
+    public String toString() {
+        return "Mago" + super.toString();
+    }
 }
