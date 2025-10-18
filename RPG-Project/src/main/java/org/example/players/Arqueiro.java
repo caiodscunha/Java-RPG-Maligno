@@ -7,8 +7,10 @@ public class Arqueiro extends Personagem {
 
 
     public Arqueiro(String nome) {
-        super(nome, 70, 1);
+        super(nome, 1);
 
+        this.pontosVida = 70;
+        this.maxPontosVida = 70;
         this.ataque = 7;
         this.defensa = 8;
         this.inventario = new Inventario();

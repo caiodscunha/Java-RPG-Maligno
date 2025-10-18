@@ -1,5 +1,6 @@
 package org.example.jogo;
 
+import org.example.models.Inimigo;
 import org.example.players.Arqueiro;
 import org.example.players.Guerreiro;
 import org.example.players.Mago;
@@ -16,7 +17,10 @@ public class Jogo {
     private static boolean isRunning = false;
 
     private static int gameAct = 1;
-    private static int gameCicle = 0;
+    private static int place = 0;
+    private static String[] places = {"Cela do caps", "Everhood Stream", "Labubu land", "Saida assombrada"};
+
+    private static Inimigo[] encontros = {new Inimigo("teste", 1)};
 
     //Metodo estático para printar opções e ler a selecionada
     public static int readInt(String prompt, int userChoices) {
@@ -140,8 +144,36 @@ public class Jogo {
         gameLoop();
     }
 
-    private static void continueJourney() {
+    private static void checkAct() {
+        if(jogador.getNivel() >= 5 && gameAct == 1){
+            gameAct = 2;
+            place = 1;
+            encontros = new Inimigo[]{new Inimigo("teste", jogador.getNivel())};
+            //mudar o ato da história e settar o array de encontros
+        }else if(jogador.getNivel() >= 8 && gameAct == 2){
+            gameAct = 3;
+            place = 2;
+            //mudar o ato da história e settar o array de encontros
+        }
+    }
 
+    private static void continueJourney() {
+        checkAct();
+        if(gameAct != 4){
+            randomEncounter();
+        }
+    }
+
+    private static void randomEncounter() {
+        int random = (int) (Math.random() * encontros.length);
+        String placa = places[random];
+        Inimigo inimigo = encontros[random];
+
+        if(inimigo == null){
+            //sortear algo bom(Rest ou Achar item)
+        }else{
+            //batalha com inimigo
+        }
     }
 
     private static void printMenu() {

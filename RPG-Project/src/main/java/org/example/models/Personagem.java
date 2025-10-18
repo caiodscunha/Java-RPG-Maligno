@@ -13,7 +13,7 @@ public abstract class Personagem {
 
     protected Inventario inventario;
 
-    public Personagem(String nome, int maxPontosVida, int nivel) {
+    public Personagem(String nome, int nivel) {
         this.nome = nome;
         this.pontosVida = maxPontosVida;
         this.maxPontosVida = maxPontosVida;
@@ -21,6 +21,10 @@ public abstract class Personagem {
         this.xpToNextLevel = 10;
         this.xp = 0;
 
+    }
+
+    public int getNivel(){
+        return this.nivel;
     }
 
     @Override
