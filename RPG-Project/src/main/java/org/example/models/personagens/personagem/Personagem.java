@@ -3,7 +3,7 @@ package org.example.models.personagens.personagem;
 import org.example.models.inventario.Inventario;
 import org.example.models.personagens.inimigos.Inimigo;
 
-public abstract class Personagem {
+public abstract class Personagem implements Cloneable {
     protected String nome;
     protected int pontosVida, maxPontosVida;
 
@@ -19,6 +19,16 @@ public abstract class Personagem {
         this.pontosVida = 1;
         this.maxPontosVida = 1;
         this.nivel = nivel;
+    }
+
+    public Personagem(Personagem personagem) {
+        this.nome = personagem.nome;
+        this.pontosVida = personagem.pontosVida;
+        this.maxPontosVida = personagem.maxPontosVida;
+        this.ataque = personagem.ataque;
+        this.defensa = personagem.defensa;
+        this.nivel = personagem.nivel;
+        this.inventario = personagem.inventario.clone();
     }
 
     public int getNivel(){

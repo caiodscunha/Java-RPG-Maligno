@@ -167,14 +167,82 @@ public class Jogo {
 
     private static void randomEncounter() {
         int random = (int) (Math.random() * (encontros.length*1.5));
-        String lugar = places[gameAct-1];
 
-        if(encontros.length < random){
+        if(encontros.length <= random){
+            System.out.println("Descanso?");
+            anythingToContinue();
             //sortear algo bom(Rest ou Achar item)
         }else{
-            Inimigo inimigo = encontros[random];
+            Inimigo inimigo = encontros[random].clone();
+            battle(inimigo);
+
             //batalha com inimigo
         }
+    }
+
+    private static void battle(Inimigo inimigo) {
+        int input, xp;
+
+        do{
+            clearConsole();
+            printBattleHud(inimigo);
+
+            input = readInt("->", 3);
+
+            switch (input){
+                case 1 -> {
+                    inimigo.tomarDano(jogador);
+                    if(!inimigo.isVivo()) break;
+                    jogador.tomarDano(inimigo);
+                }
+                case 2 -> {
+                    //n feito ainda
+                }
+                default -> {
+                    if(Math.random()*20 < 10){
+                        System.out.println("Você Fugiu...");
+                        anythingToContinue();
+                        return;
+                    }
+                    System.out.println("Você falha ao fugir...");
+                    anythingToContinue();
+                }
+            }
+
+            scanner.nextLine();
+
+        }while (inimigo.isVivo() && jogador.isVivo());
+
+        if(!jogador.isVivo()) jogadorMorreu();
+
+        xp = inimigo.getDropedXp();
+
+        System.out.println("Você Venceu! +"+xp+"XP");
+        jogador.upar(xp);
+        anythingToContinue();
+
+
+    }
+
+    private static void jogadorMorreu() {
+        System.out.println("Jogador Morreu!");
+    }
+
+    private static void printBattleHud(Inimigo inimigo) {
+        printHeading("BATALHA - " + places[place]);
+        System.out.println(inimigo.toString());
+        printSeparator(30);
+        System.out.println(inimigo.inimigoAsciiArt());
+
+        printSeparator(30);
+        System.out.print(
+                """
+                (1) Lutar
+                (2) Usar Item
+                (3) Fugir
+                """);
+
+
     }
 
     private static void printMenu() {
