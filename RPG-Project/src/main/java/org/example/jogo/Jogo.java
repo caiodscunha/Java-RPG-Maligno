@@ -161,17 +161,18 @@ public class Jogo {
         checkAct();
         if(gameAct != 4){
             randomEncounter();
+            return;
         }
     }
 
     private static void randomEncounter() {
-        int random = (int) (Math.random() * encontros.length);
-        String placa = places[random];
-        Inimigo inimigo = encontros[random];
+        int random = (int) (Math.random() * (encontros.length*1.5));
+        String lugar = places[gameAct-1];
 
-        if(inimigo == null){
+        if(encontros.length < random){
             //sortear algo bom(Rest ou Achar item)
         }else{
+            Inimigo inimigo = encontros[random];
             //batalha com inimigo
         }
     }
