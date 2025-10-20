@@ -1,18 +1,18 @@
 package org.example.jogo;
 
-import org.example.models.Inimigo;
-import org.example.players.Arqueiro;
-import org.example.players.Guerreiro;
-import org.example.players.Mago;
-import org.example.models.Personagem;
+import org.example.models.personagens.inimigos.Inimigo;
+import org.example.models.personagens.players.classes.Arqueiro;
+import org.example.models.personagens.players.classes.Guerreiro;
+import org.example.models.personagens.players.classes.Mago;
+import org.example.models.personagens.personagem.Personagem;
+import org.example.models.personagens.players.player.Player;
 
-import java.io.Console;
 import java.util.Scanner;
 
 public class Jogo {
     static Scanner scanner =  new Scanner(System.in);
 
-    static Personagem jogador;
+    static Player jogador;
 
     private static boolean isRunning = false;
 

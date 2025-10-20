@@ -1,4 +1,6 @@
-package org.example.models;
+package org.example.models.itens;
+
+import org.example.models.efeitos.efeito.Efeito;
 
 public abstract class Item {
     protected String nome;

@@ -1,9 +1,10 @@
-package org.example.players;
+package org.example.models.personagens.players.classes;
 
-import org.example.models.Inventario;
-import org.example.models.Personagem;
+import org.example.models.inventario.Inventario;
+import org.example.models.personagens.personagem.Personagem;
+import org.example.models.personagens.players.player.Player;
 
-public class Guerreiro extends Personagem {
+public class Guerreiro extends Player {
 
 
     public Guerreiro(String nome) {

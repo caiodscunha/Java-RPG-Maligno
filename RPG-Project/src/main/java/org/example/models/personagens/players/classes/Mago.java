@@ -1,9 +1,10 @@
-package org.example.players;
+package org.example.models.personagens.players.classes;
 
-import org.example.models.Inventario;
-import org.example.models.Personagem;
+import org.example.models.inventario.Inventario;
+import org.example.models.personagens.personagem.Personagem;
+import org.example.models.personagens.players.player.Player;
 
-public class Mago extends Personagem {
+public class Mago extends Player {
 
     public Mago(String nome) {
         super(nome, 1);

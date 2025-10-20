@@ -1,6 +1,6 @@
 package org.example.itens;
 
-import org.example.models.Item;
+import org.example.models.itens.Item;
 
 public class PoçãoCura extends Item {
 
