@@ -23,7 +23,7 @@ public class Inimigo extends Personagem implements Cloneable{
     }
 
     public int getDropedXp(){
-        return (this.nivel + 2);
+        return (this.nivel + 2)*10;
     }
 
     @Override

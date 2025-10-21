@@ -9,7 +9,7 @@ import org.example.models.personagens.players.player.Player;
 
 import java.util.Scanner;
 
-public class Jogo {
+public class  Jogo {
     static Scanner scanner =  new Scanner(System.in);
 
     static Player jogador;
@@ -149,6 +149,8 @@ public class Jogo {
             gameAct = 2;
             place = 1;
             encontros = new Inimigo[]{new Inimigo("teste", jogador.getNivel())};
+            scanner.nextLine();
+            Historia.printSecondAct();
             //mudar o ato da história e settar o array de encontros
         }else if(jogador.getNivel() >= 8 && gameAct == 2){
             gameAct = 3;
@@ -158,7 +160,9 @@ public class Jogo {
     }
 
     private static void continueJourney() {
+        int tempAct = gameAct;
         checkAct();
+        if(tempAct != gameAct) return;
         if(gameAct != 4){
             randomEncounter();
             return;

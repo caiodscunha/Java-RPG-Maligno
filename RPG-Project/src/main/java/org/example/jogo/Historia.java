@@ -36,4 +36,10 @@ public class Historia {
         System.out.println("Você respira fundo e adentra a escuridão da Masmorra.\n");
         Jogo.anythingToContinue();
     }
+
+    public static void printSecondAct(){
+        Jogo.printHeading("Segundo Ato");
+        System.out.println("Apenas testando");
+        Jogo.anythingToContinue();
+    }
 }
