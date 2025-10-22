@@ -2,7 +2,9 @@ package org.example.models.personagens.players.player;
 
 import org.example.models.personagens.personagem.Personagem;
 
-public class Player extends Personagem {
+import java.io.Serializable;
+
+public class Player extends Personagem implements Serializable {
 
     protected int xp;
     protected int xpToNextLevel;
@@ -11,6 +13,14 @@ public class Player extends Personagem {
         super(nome, nivel);
         this.xp = 0;
         this.xpToNextLevel = 10;
+    }
+
+    public Player(Player p){
+        super(p);
+
+        this.xp = p.xp;
+        this.xpToNextLevel = p.xpToNextLevel;
+
     }
 
     public void upar(int xp){
@@ -23,6 +33,10 @@ public class Player extends Personagem {
         }
 
         this.xp = tempXp;
+    }
+
+    public String getNome() {
+        return this.nome;
     }
 
     @Override

@@ -3,7 +3,9 @@ package org.example.models.personagens.personagem;
 import org.example.models.inventario.Inventario;
 import org.example.models.personagens.inimigos.Inimigo;
 
-public abstract class Personagem implements Cloneable {
+import java.io.Serializable;
+
+public abstract class Personagem implements Cloneable, Serializable {
     protected String nome;
     protected int pontosVida, maxPontosVida;
 

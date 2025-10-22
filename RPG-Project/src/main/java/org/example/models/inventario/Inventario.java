@@ -1,6 +1,8 @@
 package org.example.models.inventario;
 
-public class Inventario implements Cloneable{
+import java.io.Serializable;
+
+public class Inventario implements Cloneable, Serializable {
 
 
 

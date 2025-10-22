@@ -6,7 +6,14 @@ import org.example.models.personagens.players.classes.Guerreiro;
 import org.example.models.personagens.players.classes.Mago;
 import org.example.models.personagens.personagem.Personagem;
 import org.example.models.personagens.players.player.Player;
+import org.example.save.Save;
+import org.example.save.SaveManager;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
 import java.util.Scanner;
 
 public class  Jogo {
@@ -87,7 +94,7 @@ public class  Jogo {
 
             switch (input){
                 case 1 -> startGame();
-                case 2 -> loadSave();
+                case 2 -> loadGame();
                 default -> System.out.println("Saindo...");
             }
         }
@@ -95,8 +102,46 @@ public class  Jogo {
 
     }
 
-    private static void loadSave() {
+    private static void loadGame() {
+        clearConsole();
 
+        List<Save> allSaves = SaveManager.listAllSaves();
+
+        if (allSaves.isEmpty()) {
+            printHeading("Nenhum Save Encontrado!");
+            anythingToContinue();
+            return;
+        }
+
+        printHeading("Escolha um Save para Carregar:");
+
+        for (int i = 0; i < allSaves.size(); i++) {
+            Save s = allSaves.get(i);
+            System.out.printf("(%d) %s | Ato %d\n",
+                    i + 1,
+                    s.getJogador().toString(),
+                    s.getGameAct()
+            );
+        }
+        System.out.printf("(%d) Voltar\n", allSaves.size() + 1);
+
+        int input = readInt("->", allSaves.size() + 1);
+        scanner.nextLine();
+
+        if (input == allSaves.size() + 1) {
+            return;
+        }
+
+        Save selectedSave = allSaves.get(input - 1);
+
+        jogador = selectedSave.getJogador();
+        gameAct = selectedSave.getGameAct();
+
+        isRunning = true;
+        clearConsole();
+        System.out.println("Save carregado com sucesso! Bem-vindo(a) de volta, " + jogador.getNome() + "!");
+        anythingToContinue();
+        gameLoop();
     }
 
     public static void startGame(){
@@ -269,7 +314,13 @@ public class  Jogo {
             switch (input) {
                 case 1 -> continueJourney();
                 case 2 -> continueJourney();//usar itens;
-                case 3 -> isRunning = false;
+                case 3 -> {
+
+                    Save save = new Save(jogador, gameAct);
+                    boolean isSaved = SaveManager.salvar(jogador.getNome(), save);
+                    if(isSaved) isRunning = false;
+
+                }
             }
 
         }

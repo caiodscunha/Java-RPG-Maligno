@@ -2,7 +2,9 @@ package org.example.models.itens;
 
 import org.example.models.efeitos.efeito.Efeito;
 
-public abstract class Item {
+import java.io.Serializable;
+
+public abstract class Item implements Serializable {
     protected String nome;
     protected String descricao;
     protected Efeito efeito;

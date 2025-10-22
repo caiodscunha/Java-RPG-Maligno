@@ -1,4 +1,6 @@
 package org.example.models.efeitos.efeito;
 
-public class Efeito {
+import java.io.Serializable;
+
+public class Efeito implements Serializable {
 }
