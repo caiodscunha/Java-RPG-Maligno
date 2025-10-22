@@ -60,7 +60,6 @@ public class SaveManager {
 
     public static Save carregar(String fileName) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_DIRECTORY + fileName))) {
-            System.out.println("Jogo carregado com sucesso!");
             return (Save) ois.readObject();
         } catch (Exception e) {
             System.err.println("Erro ao carregar jogo: " + e.getMessage());

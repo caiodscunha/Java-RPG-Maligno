@@ -151,11 +151,28 @@ public class  Jogo {
         int input;
 
         do {
+            clearConsole();
             printHeading("Qual é seu nome?");
             System.out.print("->");
 
             nome = scanner.nextLine();
             clearConsole();
+
+            List<Save> existingSaves = SaveManager.listAllSaves();
+
+            boolean nomeEmUso = false;
+            for (Save s : existingSaves) {
+                if (s.getJogador().getNome().equalsIgnoreCase(nome)) {
+                    nomeEmUso = true;
+                    break;
+                }
+            }
+
+            if (nomeEmUso) {
+                printHeading("Erro: O nome '" + nome + "' já está em uso em um save existente.");
+                anythingToContinue();
+                continue;
+            }
 
             printHeading("Seu nome é "+ nome + "?");
             input = readInt("(1)Sim.\n(2)Não, gostaria de mudar.\n->", 2);
