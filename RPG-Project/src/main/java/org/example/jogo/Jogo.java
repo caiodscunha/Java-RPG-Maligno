@@ -293,6 +293,7 @@ public class  Jogo {
                     }
                     System.out.println("Você falha ao fugir...");
                     anythingToContinue();
+                    jogador.tomarDano(inimigo);
                 }
             }
 
@@ -350,7 +351,7 @@ public class  Jogo {
     public static void gameLoop(){
         while(isRunning){
             printMenu();
-            int input = readInt("->", 3);
+            int input = readInt("->", 4);
             switch (input) {
                 case 1 -> continueJourney();
                 case 2 -> continueJourney();//usar itens;
