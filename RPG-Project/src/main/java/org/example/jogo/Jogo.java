@@ -1,18 +1,14 @@
 package org.example.jogo;
 
-import org.example.models.personagens.inimigos.Inimigo;
+import org.example.models.personagens.inimigos.Esqueleto;
+import org.example.models.personagens.inimigos.inimigo.Inimigo;
 import org.example.models.personagens.players.classes.Arqueiro;
 import org.example.models.personagens.players.classes.Guerreiro;
 import org.example.models.personagens.players.classes.Mago;
-import org.example.models.personagens.personagem.Personagem;
 import org.example.models.personagens.players.player.Player;
 import org.example.save.Save;
 import org.example.save.SaveManager;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +23,7 @@ public class  Jogo {
     private static int place = 0;
     private static String[] places = {"Cela do caps", "Everhood Stream", "Labubu land", "Saida assombrada"};
 
-    private static Inimigo[] encontros = {new Inimigo("teste", 1)};
+    private static String[] encontros = {"Esqueleto"};
 
     //Metodo estático para printar opções e ler a selecionada
     public static int readInt(String prompt, int userChoices) {
@@ -221,7 +217,7 @@ public class  Jogo {
 
             gameAct = 2;
             place = 1;
-            encontros = new Inimigo[]{new Inimigo("teste", jogador.getNivel())};
+            encontros = new String[]{"Inimigo"};
             scanner.nextLine();
             Historia.printSecondAct();
             //mudar o ato da história e settar o array de encontros
@@ -252,6 +248,14 @@ public class  Jogo {
         }
     }
 
+    private static Inimigo createEnemy(String type, int level) {
+        // Retorna a nova instância da subclasse com o nível escalonado
+        return switch (type) {
+            case "Esqueleto" -> new Esqueleto(level);
+            default -> new Inimigo("Inimigo Desconhecido", level);
+        };
+    }
+
     private static void randomEncounter() {
         int random = (int) (Math.random() * (encontros.length*1.5));
 
@@ -260,7 +264,7 @@ public class  Jogo {
             anythingToContinue();
             //sortear algo bom(Rest ou Achar item)
         }else{
-            Inimigo inimigo = encontros[random].clone();
+            Inimigo inimigo = createEnemy(encontros[random], jogador.getNivel());
             battle(inimigo);
 
             //batalha com inimigo
@@ -284,6 +288,7 @@ public class  Jogo {
                 }
                 case 2 -> {
                     //n feito ainda
+                    jogador.tomarDano(inimigo);
                 }
                 default -> {
                     if(Math.random()*20 < 10){
@@ -301,7 +306,10 @@ public class  Jogo {
 
         }while (inimigo.isVivo() && jogador.isVivo());
 
-        if(!jogador.isVivo()) jogadorMorreu();
+        if(!jogador.isVivo()) {
+            jogadorMorreu();
+            return;
+        }
 
         xp = inimigo.getDropedXp();
 
@@ -313,7 +321,16 @@ public class  Jogo {
     }
 
     private static void jogadorMorreu() {
-        System.out.println("Jogador Morreu!");
+        clearConsole();
+        printHeading("V O C Ê   M O R R E U !");
+        System.out.println("Sua jornada termina aqui, " + jogador.getNome() + ".");
+        printSeparator(30);
+        System.out.println("Você lutou bravamente.");
+        printSeparator(30);
+
+        isRunning = false;
+
+        anythingToContinue();
     }
 
     private static void printBattleHud(Inimigo inimigo) {
@@ -322,6 +339,8 @@ public class  Jogo {
         printSeparator(30);
         System.out.println(inimigo.inimigoAsciiArt());
 
+        printSeparator(30);
+        System.out.println(jogador.toString());
         printSeparator(30);
         System.out.print(
                 """

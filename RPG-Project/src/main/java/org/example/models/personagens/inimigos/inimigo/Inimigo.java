@@ -1,4 +1,4 @@
-package org.example.models.personagens.inimigos;
+package org.example.models.personagens.inimigos.inimigo;
 
 import org.example.models.personagens.personagem.Personagem;
 

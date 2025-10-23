@@ -30,8 +30,11 @@ public class Player extends Personagem implements Serializable {
             tempXp = tempXp - this.xpToNextLevel;
             this.nivel++;
             this.xpToNextLevel += (int)nivel/2*5;
+            this.maxPontosVida = this.maxPontosVida + 3;
+            this.ataque++;
+            this.defensa++;
         }
-
+        this.pontosVida = this.maxPontosVida;
         this.xp = tempXp;
     }
 

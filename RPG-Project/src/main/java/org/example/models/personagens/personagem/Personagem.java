@@ -1,7 +1,6 @@
 package org.example.models.personagens.personagem;
 
 import org.example.models.inventario.Inventario;
-import org.example.models.personagens.inimigos.Inimigo;
 
 import java.io.Serializable;
 
