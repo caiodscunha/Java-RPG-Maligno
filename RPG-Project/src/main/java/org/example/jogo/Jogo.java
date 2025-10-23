@@ -208,6 +208,17 @@ public class  Jogo {
 
     private static void checkAct() {
         if(jogador.getNivel() >= 5 && gameAct == 1){
+            clearConsole();
+            System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
+            int option = readInt("(1)Sim\n(2)Não\n->", 2);
+            if(option == 1){
+                Save save = new Save(jogador, gameAct);
+                SaveManager.salvar(jogador.getNome(), save);
+
+            }
+
+            //TODO: Antes de trocar de ato, tocar a boss fight
+
             gameAct = 2;
             place = 1;
             encontros = new Inimigo[]{new Inimigo("teste", jogador.getNivel())};
@@ -215,6 +226,16 @@ public class  Jogo {
             Historia.printSecondAct();
             //mudar o ato da história e settar o array de encontros
         }else if(jogador.getNivel() >= 8 && gameAct == 2){
+            clearConsole();
+            System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
+            int option = readInt("(1)Sim\n(2)Não\n->", 2);
+            if(option == 1){
+                Save save = new Save(jogador, gameAct);
+                SaveManager.salvar(jogador.getNome(), save);
+
+            }
+
+
             gameAct = 3;
             place = 2;
             //mudar o ato da história e settar o array de encontros
@@ -318,9 +339,11 @@ public class  Jogo {
         System.out.println(jogador);
         printSeparator(10);
 
-        System.out.println("(1) Explorar");
-        System.out.println("(2) Usar itens");
-        System.out.println("(3) Salvar e Sair");
+        System.out.println("""
+                (1) Explorar
+                (2) Usar itens
+                (3) Salvar
+                (4) Sair""");
 
     }
 
@@ -335,8 +358,12 @@ public class  Jogo {
 
                     Save save = new Save(jogador, gameAct);
                     boolean isSaved = SaveManager.salvar(jogador.getNome(), save);
-                    if(isSaved) isRunning = false;
+                    anythingToContinue();
 
+
+                }
+                case 4 -> {
+                    isRunning = false;
                 }
             }
 
