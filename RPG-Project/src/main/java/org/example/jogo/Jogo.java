@@ -89,8 +89,14 @@ public class  Jogo {
             scanner.nextLine();
 
             switch (input){
-                case 1 -> startGame();
-                case 2 -> loadGame();
+                case 1 -> {
+                    startGame();
+                    gameLoop();
+                }
+                case 2 -> {
+                    loadGame();
+                    gameLoop();
+                }
                 default -> System.out.println("Saindo...");
             }
         }
@@ -134,10 +140,18 @@ public class  Jogo {
         gameAct = selectedSave.getGameAct();
 
         isRunning = true;
+        loadInimigos();
+
         clearConsole();
         System.out.println("Save carregado com sucesso! Bem-vindo(a) de volta, " + jogador.getNome() + "!");
         anythingToContinue();
-        gameLoop();
+    }
+
+    private static void loadInimigos(){
+        switch (gameAct) {
+            case 1 -> encontros = new String[]{"Esqueleto"};
+            case 2 -> encontros = new String[]{"Inimigo"};
+        }
     }
 
     public static void startGame(){
@@ -176,6 +190,7 @@ public class  Jogo {
             if (input == 1) {
                 nomeSetado = true;
             }
+            loadInimigos();
             clearConsole();
             scanner.nextLine();
 
@@ -199,7 +214,7 @@ public class  Jogo {
         Historia.printIntro();
         clearConsole();
         isRunning = true;
-        gameLoop();
+
     }
 
     private static void checkAct() {
@@ -217,7 +232,9 @@ public class  Jogo {
 
             gameAct = 2;
             place = 1;
-            encontros = new String[]{"Inimigo"};
+
+            loadInimigos();
+
             scanner.nextLine();
             Historia.printSecondAct();
             //mudar o ato da história e settar o array de encontros
@@ -231,9 +248,10 @@ public class  Jogo {
 
             }
 
-
             gameAct = 3;
             place = 2;
+
+            loadInimigos();
             //mudar o ato da história e settar o array de encontros
         }
     }

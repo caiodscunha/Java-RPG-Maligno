@@ -41,7 +41,7 @@ public abstract class Personagem implements Cloneable, Serializable {
     }
 
     public int rolarAtaque(){
-        return this.ataque + ((int)(Math.random()*4));
+        return this.ataque + ((int)(Math.random()*10));
     }
 
     public void tomarDano(Personagem personagem){

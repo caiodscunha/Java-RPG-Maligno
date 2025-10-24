@@ -9,7 +9,7 @@ public class Esqueleto extends Inimigo {
         this.maxPontosVida = 10 + 2*nivel;
         this.pontosVida = this.maxPontosVida;
         this.ataque = 8 + nivel;
-        this.defensa = 7 + nivel;
+        this.defensa = 1 + nivel;
 
     }
 
