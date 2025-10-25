@@ -4,6 +4,7 @@ import org.example.models.efeitos.efeitos.EfeitoCura;
 import org.example.models.efeitos.efeitos.EfeitoDano;
 import org.example.models.inventario.Inventario;
 import org.example.models.itens.Item;
+import org.example.models.itens.itens.PocaoCura;
 import org.example.models.personagens.inimigos.Esqueleto;
 import org.example.models.personagens.inimigos.inimigo.Inimigo;
 import org.example.models.personagens.players.classes.Arqueiro;
@@ -25,7 +26,7 @@ public class  Jogo {
 
     private static int gameAct = 1;
     private static int place = 0;
-    private static String[] places = {"Cela do caps", "Everhood Stream", "Labubu land", "Saida assombrada"};
+    private static String[] places = {"Entrada da masmorra", "Everhood Stream", "Labubu land", "Saida assombrada"};
 
     private static String[] encontros = {"Esqueleto"};
 
@@ -95,6 +96,7 @@ public class  Jogo {
             switch (input){
                 case 1 -> {
                     startGame();
+                    primeiraExploracaoFeita = false;
                     gameLoop();
                 }
                 case 2 -> {
@@ -260,14 +262,68 @@ public class  Jogo {
         }
     }
 
+    private static boolean primeiraExploracaoFeita = false;
+
     private static void continueJourney() {
         int tempAct = gameAct;
         checkAct();
-        if(tempAct != gameAct) return;
-        if(gameAct != 4){
-            randomEncounter();
+        if (tempAct != gameAct) return;
+
+        if (!primeiraExploracaoFeita) {
+            primeiraExploracaoFeita = true;
+
+            historyEvent(
+                    Historia.getPrimeiraExploracaoDescricao(),
+                    Historia.getPrimeiraExploracaoOpcoes(),
+                    Historia::getRespostaPrimeiraExploracao,
+                    null
+            );
+
+            historyEvent(
+                    Historia.getEncontroIdosoDescricao(),
+                    Historia.getEncontroIdosoOpcoes(),
+                    Historia::getRespostaEncontroIdoso,
+                    (escolha) -> {
+                        switch (escolha) {
+                            case 1 -> jogador.getInventario().adicionarItem(new PocaoCura(1));
+                            case 2 -> jogador.aplicarVida(-5);
+                            case 3 -> jogador.aplicarVida(-10);
+                        }
+                    }
+            );
+
             return;
         }
+
+        if (gameAct != 4) {
+            randomEncounter();
+        }
+    }
+
+    private static void historyEvent(
+            String descricao,
+            List<String> opcoes,
+            java.util.function.Function<Integer, String> resposta,
+            java.util.function.Consumer<Integer> consequencia // pode ser null
+    ) {
+        Jogo.clearConsole();
+        System.out.println(descricao);
+        Jogo.printSeparator(40);
+
+        for (int i = 0; i < opcoes.size(); i++) {
+            System.out.printf("(%d) %s%n", i + 1, opcoes.get(i));
+        }
+
+        int escolha = Jogo.readInt("-> ", opcoes.size());
+        Jogo.clearConsole();
+
+        System.out.println(resposta.apply(escolha));
+
+        if (consequencia != null) {
+            consequencia.accept(escolha);
+        }
+        scanner.nextLine();
+        Jogo.anythingToContinue();
     }
 
     private static Inimigo createEnemy(String type, int level) {
@@ -337,17 +393,10 @@ public class  Jogo {
         xp = inimigo.getDropedXp();
 
         System.out.println("Você Venceu! +"+xp+"XP");
-        pilharInimigo(inimigo);
         jogador.upar(xp);
         anythingToContinue();
 
 
-    }
-
-    private static void pilharInimigo(Inimigo inimigo) {
-        try{
-            jogador.getInventario().pilhar(inimigo);
-        }catch (Exception e){System.err.println("Erro ao pilhar inimigo.");}
     }
 
     private static boolean usarItemEmCombate(Inimigo inimigo) {
@@ -383,6 +432,8 @@ public class  Jogo {
             System.out.println("O item não possui um efeito utilizável neste momento!");
         }
 
+        // Remove ou decrementa a quantidade
+        inventario.removerItem(indexItem);
         anythingToContinue();
         return true;
     }
