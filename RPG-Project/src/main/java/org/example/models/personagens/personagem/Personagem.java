@@ -1,6 +1,7 @@
 package org.example.models.personagens.personagem;
 
 import org.example.models.inventario.Inventario;
+import org.example.models.itens.Item;
 
 import java.io.Serializable;
 
@@ -32,6 +33,10 @@ public abstract class Personagem implements Cloneable, Serializable {
         this.inventario = personagem.inventario.clone();
     }
 
+    public Inventario getInventario() {
+        return inventario;
+    }
+
     public int getNivel(){
         return this.nivel;
     }
@@ -51,6 +56,23 @@ public abstract class Personagem implements Cloneable, Serializable {
         if(dano <= 0) return;
 
         this.pontosVida = (dano > this.pontosVida) ? 0 : this.pontosVida - dano;
+
+    }
+
+    public void aplicarVida(int vida){
+        int variacaoVida = this.pontosVida + vida;
+
+        if(variacaoVida <= 0){
+            this.pontosVida = 0;
+            return;
+        }
+
+        if(variacaoVida > this.maxPontosVida){
+            this.pontosVida = this.maxPontosVida;
+            return;
+        }
+
+        this.pontosVida = variacaoVida;
 
     }
 

@@ -1,5 +1,9 @@
 package org.example.jogo;
 
+import org.example.models.efeitos.efeitos.EfeitoCura;
+import org.example.models.efeitos.efeitos.EfeitoDano;
+import org.example.models.inventario.Inventario;
+import org.example.models.itens.Item;
 import org.example.models.personagens.inimigos.Esqueleto;
 import org.example.models.personagens.inimigos.inimigo.Inimigo;
 import org.example.models.personagens.players.classes.Arqueiro;
@@ -305,7 +309,8 @@ public class  Jogo {
                     jogador.tomarDano(inimigo);
                 }
                 case 2 -> {
-                    //n feito ainda
+                    boolean usedItem = usarItemEmCombate(inimigo);
+                    if(!usedItem) continue;
                     jogador.tomarDano(inimigo);
                 }
                 default -> {
@@ -336,6 +341,43 @@ public class  Jogo {
         anythingToContinue();
 
 
+    }
+
+    private static boolean usarItemEmCombate(Inimigo inimigo) {
+        Inventario inventario = jogador.getInventario();
+
+        inventario.listarItens();
+
+        if (inventario.isVazio()) {
+            anythingToContinue();
+            return false;
+        }
+        clearConsole();
+        int opcoes = inventario.quantidadeItens()+1;
+        System.out.println("("+opcoes+") Voltar");
+
+        System.out.println("\nDigite o número item que deseja usar: ");
+        int indexItem = readInt("->", opcoes);
+        scanner.nextLine();
+
+        if (opcoes == indexItem) return false;
+
+        Item item = inventario.buscarItem(indexItem);
+
+        // Decide o alvo com base no tipo de efeito
+        if (item.getEfeito() instanceof EfeitoCura) {
+            System.out.println("\nVocê usou " + item.getNome() + " em si mesmo!");
+            inventario.usarItem(indexItem, jogador);
+        } else if (item.getEfeito() instanceof EfeitoDano) {
+            System.out.println("\nVocê usou " + item.getNome() + "!");
+            inventario.usarItem(indexItem, inimigo);
+        } else {
+            System.out.println("O item não possui um efeito utilizável neste momento!");
+        }
+
+        // Remove ou decrementa a quantidade
+        inventario.removerItem(indexItem);
+        return true;
     }
 
     private static void jogadorMorreu() {
@@ -391,7 +433,28 @@ public class  Jogo {
             int input = readInt("->", 4);
             switch (input) {
                 case 1 -> continueJourney();
-                case 2 -> continueJourney();//usar itens;
+                case 2 -> {
+                    clearConsole();
+                    Inventario inventario = jogador.getInventario();
+
+                    inventario.listarItens();
+
+                    if (inventario.isVazio()) {
+                        anythingToContinue();
+                        continue;
+                    }
+                    int opcoes = inventario.quantidadeItens()+1;
+                    System.out.println("("+opcoes+") Voltar");
+
+                    System.out.println("\nDigite o número item que deseja usar: ");
+                    int indexItem = readInt("->", opcoes);
+                    scanner.nextLine();
+
+                    if (opcoes == indexItem) continue;
+
+                    inventario.usarItem(indexItem,  jogador);
+
+                }//usar itens;
                 case 3 -> {
 
                     Save save = new Save(jogador, gameAct);
