@@ -118,10 +118,12 @@ public class Historia {
 
     // SEGUNDO ATO
     public static void printSecondAct() {
+        Jogo.clearConsole();
         Jogo.printHeading("Segundo Ato");
         System.out.println("Você encontra uma escada que leva para as profundezas da masmorra.");
         Jogo.anythingToContinue();
 
+        Jogo.clearConsole();
         Jogo.printHeading("Profundezas da Masmorra");
         System.out.println("Ao descer a escada, o ar fica mais frio e úmido. Você percebe que está em um corredor estreito, iluminado por tochas antigas nas paredes.");
         System.out.println("Ao avançar, você ouve o som de passos ecoando à distância. Algo se move nas sombras...");

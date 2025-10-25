@@ -27,6 +27,8 @@ public class  Jogo {
 
     private static int gameAct = 1;
     private static int place = 0;
+
+    private static boolean primeiraExploracaoFeita = false;
     private static String[] places = {"Entrada da masmorra", "Profundezas da masmorra", "Labubu land", "Saida assombrada"};
 
     private static String[] encontros = {"Esqueleto"};
@@ -145,6 +147,7 @@ public class  Jogo {
 
         jogador = selectedSave.getJogador();
         gameAct = selectedSave.getGameAct();
+        primeiraExploracaoFeita = selectedSave.isPrimeiraExploracaoFeita();
 
         isRunning = true;
         loadInimigos();
@@ -230,7 +233,7 @@ public class  Jogo {
             System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
             int option = readInt("(1)Sim\n(2)Não\n->", 2);
             if(option == 1){
-                Save save = new Save(jogador, gameAct);
+                Save save = new Save(jogador, gameAct, primeiraExploracaoFeita);
                 SaveManager.salvar(jogador.getNome(), save);
 
             }
@@ -251,7 +254,7 @@ public class  Jogo {
             System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
             int option = readInt("(1)Sim\n(2)Não\n->", 2);
             if(option == 1){
-                Save save = new Save(jogador, gameAct);
+                Save save = new Save(jogador, gameAct, primeiraExploracaoFeita);
                 SaveManager.salvar(jogador.getNome(), save);
 
             }
@@ -264,8 +267,6 @@ public class  Jogo {
             //mudar o ato da história e settar o array de encontros
         }
     }
-
-    private static boolean primeiraExploracaoFeita = false;
 
     private static void continueJourney() {
         int tempAct = gameAct;
@@ -573,7 +574,7 @@ public class  Jogo {
                 }//usar itens;
                 case 3 -> {
 
-                    Save save = new Save(jogador, gameAct);
+                    Save save = new Save(jogador, gameAct, primeiraExploracaoFeita);
                     boolean isSaved = SaveManager.salvar(jogador.getNome(), save);
                     anythingToContinue();
 
