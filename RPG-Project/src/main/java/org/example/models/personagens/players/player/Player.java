@@ -48,4 +48,39 @@ public class Player extends Personagem implements Serializable {
                 " | " + "xp: " + this.xp + "/" + this.xpToNextLevel;
     }
 
+    @Override
+    public int hashCode() {
+        int retorno = super.hashCode();
+        retorno = retorno * 7 + ((Integer)(this.xp)).hashCode();
+        retorno = retorno * 7 + ((Integer)(this.xpToNextLevel)).hashCode();
+        return retorno;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(obj instanceof Player) return false;
+        Player p = (Player)obj;
+        if(!this.nome.equals(p.nome)) return false;
+        if(this.xp != p.xp) return false;
+        if(this.xpToNextLevel != p.xpToNextLevel) return false;
+        if(this.nivel != p.nivel) return false;
+        if(this.defensa != p.defensa) return false;
+        if(this.ataque != p.ataque) return false;
+        if(this.pontosVida != p.pontosVida) return false;
+        if(this.maxPontosVida != p.maxPontosVida) return false;
+        if(!this.inventario.equals(p.inventario)) return false;
+        return true;
+
+    }
+
+    @Override
+    protected Object clone() {
+        Personagem player = null;
+        try {
+            player = new Player(this);
+        } catch (Exception e) {}
+        return player;
+    }
+
 }

@@ -82,4 +82,19 @@ public abstract class Personagem implements Cloneable, Serializable {
         return " | " + this.nome + " | "
                 + "hp: " + this.pontosVida + "/" + this.maxPontosVida + " | " + "lv: " + this.nivel;
     }
+
+    @Override
+    public int hashCode() {
+        int retorno = 1;
+        retorno = retorno * 7 + this.nome.hashCode();
+        retorno = retorno * 7 + ((Integer)this.pontosVida).hashCode();
+        retorno = retorno * 7 + ((Integer)this.maxPontosVida).hashCode();
+        retorno = retorno * 7 + ((Integer)this.ataque).hashCode();
+        retorno = retorno * 7 + ((Integer)this.defensa).hashCode();
+        retorno = retorno * 7 + ((Integer)this.nivel);
+        retorno = retorno * 7 + this.inventario.hashCode();
+
+        return super.hashCode();
+    }
+
 }
