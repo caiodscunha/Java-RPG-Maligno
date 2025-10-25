@@ -335,17 +335,49 @@ public class  Jogo {
     }
 
     private static void randomEncounter() {
-        int random = (int) (Math.random() * (encontros.length*1.5));
+        int chance = (int)(Math.random() * 100); // 0 a 99
 
-        if(encontros.length <= random){
-            System.out.println("Descanso?");
-            anythingToContinue();
-            //sortear algo bom(Rest ou Achar item)
-        }else{
-            Inimigo inimigo = createEnemy(encontros[random], jogador.getNivel());
+        // Encontro com inimigo
+        if (chance < 70) { // 70% de chance
+            int enemyIndex = (int)(Math.random() * encontros.length);
+            Inimigo inimigo = createEnemy(encontros[enemyIndex], jogador.getNivel());
             battle(inimigo);
+        } else {
+            // Evento aleatório: 70% baú, 30% fogueira
+            double eventoChance = Math.random(); // 0.0 a 1.0
 
-            //batalha com inimigo
+            if (eventoChance < 0.7) { // 70% chance de baú
+                System.out.println("Você encontra um baú no caminho...");
+                System.out.println("(1) Abrir o baú\n(2) Ignorar");
+                int escolha = readInt("-> ", 2);
+                if (escolha == 1) {
+                    boolean isArmadilha = Math.random() < 0.5; // 50% mimico ou armadilha
+                    if (isArmadilha) {
+                        boolean isMimico = Math.random() < 0.7;
+                        if (isMimico) {
+                            int dano = 10 + (int) (Math.random() * 11); // 10-20
+                            System.out.println("Era um mimico! Você é atacado e perde " + dano + " pontos de vida.");
+                            jogador.aplicarVida(-dano);
+                        } else {
+                            int dano = 20 + (int) (Math.random() * 21); // 20-40
+                            System.out.println("Era uma armadilha! Uma grande explosão acontece, você perde " + dano + " pontos de vida.");
+                            jogador.aplicarVida(-dano);
+                        }
+                    } else {
+                        System.out.println("O baú continha algo útil! Você encontra uma Poção de Cura.");
+                        jogador.getInventario().adicionarItem(new PocaoCura(1));
+                    }
+                } else {
+                    System.out.println("Você decide ignorar o baú e segue em frente.");
+                }
+            } else { // 30% chance de fogueira
+                System.out.println("Você encontra uma fogueira de descanso.");
+                System.out.println("Você descansa e recupera 50 pontos de vida!");
+                jogador.aplicarVida(50);
+            }
+
+            scanner.nextLine();
+            Jogo.anythingToContinue();
         }
     }
 

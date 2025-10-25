@@ -63,7 +63,7 @@ public class Historia {
         return switch (escolha) {
             case 1 -> "Você ergue sua arma, pronto para enfrentar o que vier! Seu coração acelera... ao chegar mais perto, percebe que era apenas um velho.";
             case 2 -> "Você observa com atenção... era apenas um velho enfraquecido! Você se aproxima cautelosamente.";
-            case 3 -> "Você dá alguns passos para trás... mas sua coragem fala mais alto. Você respira fundo e decide seguir em frente — e vê a figura de um velho.";
+            case 3 -> "Você dá alguns passos para trás... mas sua coragem fala mais alto. Você respira fundo e decide seguir em frente e vê a figura de um velho.";
             default -> "";
         };
     }
