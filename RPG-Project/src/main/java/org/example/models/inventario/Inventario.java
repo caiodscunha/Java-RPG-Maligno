@@ -44,8 +44,8 @@ public class Inventario implements Cloneable, Serializable {
                 return;
             }
         }
-        itens.add(novoItem);
-        Collections.sort(itens);
+        this.itens.add(novoItem);
+        Collections.sort(this.itens);
     }
 
     public void usarItem(int index, Personagem alvo) {
@@ -100,6 +100,34 @@ public class Inventario implements Cloneable, Serializable {
             retorno = new Inventario(this);
         } catch (Exception e) {
 
+        }
+        return retorno;
+    }
+
+    @Override
+    public int hashCode() {
+        int retorno = 1;
+        for (Item item : this.itens) {
+            retorno = retorno * 31 + (item.hashCode());
+        }
+        return (retorno < 0) ? -retorno : retorno;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(obj == this) return true;
+        if(!(obj instanceof Inventario)) return false;
+        Inventario outro = (Inventario)obj;
+        if(!this.itens.equals(outro.itens)) return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String retorno = "Inventário: ";
+        for (Item item : this.itens) {
+            retorno += "\n" + item.toString();
         }
         return retorno;
     }

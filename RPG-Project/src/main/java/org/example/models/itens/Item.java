@@ -75,6 +75,17 @@ public class Item implements Comparable<Item>, Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int retorno = 1;
+        retorno = retorno * 7 + (this.nome.hashCode());
+        retorno = retorno * 7 + (this.descricao.hashCode());
+        retorno = retorno * 7 + (this.efeito.hashCode());
+        retorno = retorno * 7 + ((Integer)(this.quantidade)).hashCode();
+
+        return (retorno<0) ? -retorno : retorno;
+    }
+
+    @Override
     public Item clone() {
         Item retono = null;
         try {

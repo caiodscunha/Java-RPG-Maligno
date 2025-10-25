@@ -53,13 +53,13 @@ public class Player extends Personagem implements Serializable {
         int retorno = super.hashCode();
         retorno = retorno * 7 + ((Integer)(this.xp)).hashCode();
         retorno = retorno * 7 + ((Integer)(this.xpToNextLevel)).hashCode();
-        return retorno;
+        return (retorno<0) ? -retorno : retorno;
     }
 
     @Override
     public boolean equals(Object obj) {
         if(obj == null) return false;
-        if(obj instanceof Player) return false;
+        if(!(obj instanceof Player)) return false;
         Player p = (Player)obj;
         if(!this.nome.equals(p.nome)) return false;
         if(this.xp != p.xp) return false;

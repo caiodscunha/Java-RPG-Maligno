@@ -125,10 +125,9 @@ public class  Jogo {
 
         for (int i = 0; i < allSaves.size(); i++) {
             Save s = allSaves.get(i);
-            System.out.printf("(%d) %s | Ato %d\n",
+            System.out.printf("(%d) %s\n",
                     i + 1,
-                    s.getJogador().toString(),
-                    s.getGameAct()
+                    s.toString()
             );
         }
         System.out.printf("(%d) Voltar\n", allSaves.size() + 1);

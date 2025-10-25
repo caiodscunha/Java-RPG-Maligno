@@ -94,7 +94,7 @@ public abstract class Personagem implements Cloneable, Serializable {
         retorno = retorno * 7 + ((Integer)this.nivel);
         retorno = retorno * 7 + this.inventario.hashCode();
 
-        return super.hashCode();
+        return (retorno<0) ? -retorno : retorno;
     }
 
 }
