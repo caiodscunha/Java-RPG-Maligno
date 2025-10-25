@@ -21,6 +21,7 @@ public abstract class Personagem implements Cloneable, Serializable {
         this.pontosVida = 1;
         this.maxPontosVida = 1;
         this.nivel = nivel;
+        this.inventario = new Inventario();
     }
 
     public Personagem(Personagem personagem) {
@@ -46,7 +47,7 @@ public abstract class Personagem implements Cloneable, Serializable {
     }
 
     public int rolarAtaque(){
-        return this.ataque + ((int)(Math.random()*10));
+        return this.ataque + ((int)(Math.random()*10 + 1));
     }
 
     public void tomarDano(Personagem personagem){

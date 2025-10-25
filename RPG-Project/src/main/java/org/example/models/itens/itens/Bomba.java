@@ -6,6 +6,6 @@ import org.example.models.itens.Item;
 
 public class Bomba extends Item {
     public Bomba(int quantidade) {
-        super("Bomba", "Causa 10 de dano em um inimigo", new EfeitoDano(20), quantidade);
+        super("Bomba", "Causa 10 de dano em um inimigo", new EfeitoDano(10), quantidade);
     }
 }

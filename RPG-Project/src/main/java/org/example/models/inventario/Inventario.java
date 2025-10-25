@@ -27,12 +27,17 @@ public class Inventario implements Cloneable, Serializable {
 
     public void pilhar(Personagem personagem) throws Exception {
         if (personagem == null) throw new Exception("Personagem nulo");
-        for(Item item: personagem.getInventario().itens){
+        Inventario inventario = (Inventario) personagem.getInventario().clone();
+        for(Item item: inventario.itens) {
             adicionarItem(item.clone());
+            System.out.println("+"+item.getQuantidade()+" "+ item.getNome());
         }
     }
 
     public void adicionarItem(Item novoItem) {
+        if (novoItem.getQuantidade() == 0) {
+            return;
+        }
         for (Item item : this.itens) {
             if (item.equals(novoItem)) {
                 item.adicionarQuantidade(novoItem.getQuantidade());

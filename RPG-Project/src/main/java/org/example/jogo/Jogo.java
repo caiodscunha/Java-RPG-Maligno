@@ -337,10 +337,17 @@ public class  Jogo {
         xp = inimigo.getDropedXp();
 
         System.out.println("Você Venceu! +"+xp+"XP");
+        pilharInimigo(inimigo);
         jogador.upar(xp);
         anythingToContinue();
 
 
+    }
+
+    private static void pilharInimigo(Inimigo inimigo) {
+        try{
+            jogador.getInventario().pilhar(inimigo);
+        }catch (Exception e){System.err.println("Erro ao pilhar inimigo.");}
     }
 
     private static boolean usarItemEmCombate(Inimigo inimigo) {
@@ -376,8 +383,6 @@ public class  Jogo {
             System.out.println("O item não possui um efeito utilizável neste momento!");
         }
 
-        // Remove ou decrementa a quantidade
-        inventario.removerItem(indexItem);
         anythingToContinue();
         return true;
     }

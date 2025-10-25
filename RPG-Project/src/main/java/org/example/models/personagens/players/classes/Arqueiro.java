@@ -14,7 +14,6 @@ public class Arqueiro extends Player {
         this.maxPontosVida = 70;
         this.ataque = 7;
         this.defensa = 8;
-        this.inventario = new Inventario();
     }
 
     @Override

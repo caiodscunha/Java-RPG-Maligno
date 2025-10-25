@@ -13,7 +13,6 @@ public class Mago extends Player {
         this.pontosVida = 50;
         this.ataque = 10;
         this.defensa = 7;
-        this.inventario = new Inventario();
     }
 
     @Override
