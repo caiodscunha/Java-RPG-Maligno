@@ -48,6 +48,7 @@ public class Item implements Comparable<Item>, Serializable {
         if (alvo == null) return;
         if (alvo instanceof Player && !(efeito instanceof EfeitoCura)) {
             System.out.println("Este item não pode ser usado neste momento...");
+            return;
         }
         this.efeito.aplicar(alvo);
         this.quantidade = this.quantidade-1;

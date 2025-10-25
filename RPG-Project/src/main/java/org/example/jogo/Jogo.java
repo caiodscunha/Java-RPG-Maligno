@@ -346,13 +346,14 @@ public class  Jogo {
     private static boolean usarItemEmCombate(Inimigo inimigo) {
         Inventario inventario = jogador.getInventario();
 
+        clearConsole();
         inventario.listarItens();
 
         if (inventario.isVazio()) {
             anythingToContinue();
             return false;
         }
-        clearConsole();
+
         int opcoes = inventario.quantidadeItens()+1;
         System.out.println("("+opcoes+") Voltar");
 
@@ -377,6 +378,7 @@ public class  Jogo {
 
         // Remove ou decrementa a quantidade
         inventario.removerItem(indexItem);
+        anythingToContinue();
         return true;
     }
 
@@ -453,6 +455,7 @@ public class  Jogo {
                     if (opcoes == indexItem) continue;
 
                     inventario.usarItem(indexItem,  jogador);
+                    anythingToContinue();
 
                 }//usar itens;
                 case 3 -> {

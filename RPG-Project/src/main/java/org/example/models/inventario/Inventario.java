@@ -77,6 +77,7 @@ public class Inventario implements Cloneable, Serializable {
         int i = 1;
         for (Item item : itens) {
             System.out.println("("+i+")" + " " + item.toString());
+            i++;
         }
 
     }
