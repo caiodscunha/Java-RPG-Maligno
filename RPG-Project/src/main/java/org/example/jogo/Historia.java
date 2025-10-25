@@ -41,7 +41,7 @@ public class Historia {
     }
 
     // PRIMEIRA EXPLORAÇÃO
-    public static String getPrimeiraExploracaoDescricao() {
+    public static String getPrimeiraEscolha() {
         return """
                 Você dá seus primeiros passos dentro da masmorra...
                 O ar é frio e pesado. Sons de correntes ecoam ao longe.
@@ -51,7 +51,7 @@ public class Historia {
                 """;
     }
 
-    public static List<String> getPrimeiraExploracaoOpcoes() {
+    public static List<String> getPrimeiraEscolhaOpcoes() {
         return List.of(
                 "Saco a arma e me preparo para lutar.",
                 "Tento observar com cuidado, talvez não seja um inimigo.",
@@ -59,7 +59,7 @@ public class Historia {
         );
     }
 
-    public static String getRespostaPrimeiraExploracao(int escolha) {
+    public static String getRespostaPrimeiraEscolha(int escolha) {
         return switch (escolha) {
             case 1 -> "Você ergue sua arma, pronto para enfrentar o que vier! Seu coração acelera... ao chegar mais perto, percebe que era apenas um velho.";
             case 2 -> "Você observa com atenção... era apenas um velho enfraquecido! Você se aproxima cautelosamente.";
@@ -119,7 +119,46 @@ public class Historia {
     // SEGUNDO ATO
     public static void printSecondAct() {
         Jogo.printHeading("Segundo Ato");
-        System.out.println("Apenas testando...");
+        System.out.println("Você encontra uma escada que leva para as profundezas da masmorra.");
         Jogo.anythingToContinue();
+
+        Jogo.printHeading("Profundezas da Masmorra");
+        System.out.println("Ao descer a escada, o ar fica mais frio e úmido. Você percebe que está em um corredor estreito, iluminado por tochas antigas nas paredes.");
+        System.out.println("Ao avançar, você ouve o som de passos ecoando à distância. Algo se move nas sombras...");
+        Jogo.anythingToContinue();
+    }
+
+    // ENCONTRA BIFURCACAO
+    public static String getEncontroBifurcacao() {
+        return """
+                Você se aproxima de uma bifurcação no corredor. Para onde deseja ir?
+                """;
+    }
+
+    public static List<String> getEncontroBifurcacaoOpcoes() {
+        return List.of(
+                "Seguir pelo corredor à esquerda, onde o som é mais intenso.",
+                "Seguir pelo corredor à direita, que está em completo silencio."
+        );
+    }
+
+    public static String getRespostaEncontroBifurcacao(int escolha) {
+        return switch (escolha) {
+            case 1 -> """
+                   Você decide seguir pelo corredor à esquerda. 
+                   Conforme se aproxima, um pequeno esqueleto surge.
+                   Todo aquele barulho vinha apenas dele.
+                   Você o derrota com facilidade.
+                   (Você pega uma bomba)
+                    """;
+            case 2 -> """
+                   Você decide seguir pelo corredor à direita. 
+                   Ao caminhar ouve um barulho intenso vindo do chão.
+                   Sem que você possa reagir o chão se quebra totalmente.
+                   Você cai e se machuca muito.
+                   (Você perde 100 pontos de vida)
+                    """;
+            default -> "";
+        };
     }
 }

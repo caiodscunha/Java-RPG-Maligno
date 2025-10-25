@@ -4,6 +4,7 @@ import org.example.models.efeitos.efeitos.EfeitoCura;
 import org.example.models.efeitos.efeitos.EfeitoDano;
 import org.example.models.inventario.Inventario;
 import org.example.models.itens.Item;
+import org.example.models.itens.itens.Bomba;
 import org.example.models.itens.itens.PocaoCura;
 import org.example.models.personagens.inimigos.Esqueleto;
 import org.example.models.personagens.inimigos.inimigo.Inimigo;
@@ -26,7 +27,7 @@ public class  Jogo {
 
     private static int gameAct = 1;
     private static int place = 0;
-    private static String[] places = {"Entrada da masmorra", "Everhood Stream", "Labubu land", "Saida assombrada"};
+    private static String[] places = {"Entrada da masmorra", "Profundezas da masmorra", "Labubu land", "Saida assombrada"};
 
     private static String[] encontros = {"Esqueleto"};
 
@@ -96,6 +97,7 @@ public class  Jogo {
             switch (input){
                 case 1 -> {
                     startGame();
+                    gameAct = 1;
                     primeiraExploracaoFeita = false;
                     gameLoop();
                 }
@@ -235,6 +237,7 @@ public class  Jogo {
 
             //TODO: Antes de trocar de ato, tocar a boss fight
 
+            primeiraExploracaoFeita = false;
             gameAct = 2;
             place = 1;
 
@@ -253,6 +256,7 @@ public class  Jogo {
 
             }
 
+            primeiraExploracaoFeita = false;
             gameAct = 3;
             place = 2;
 
@@ -271,25 +275,41 @@ public class  Jogo {
         if (!primeiraExploracaoFeita) {
             primeiraExploracaoFeita = true;
 
-            historyEvent(
-                    Historia.getPrimeiraExploracaoDescricao(),
-                    Historia.getPrimeiraExploracaoOpcoes(),
-                    Historia::getRespostaPrimeiraExploracao,
-                    null
-            );
+            if(gameAct == 1) {
+                historyEvent(
+                        Historia.getPrimeiraEscolha(),
+                        Historia.getPrimeiraEscolhaOpcoes(),
+                        Historia::getRespostaPrimeiraEscolha,
+                        null
+                );
 
-            historyEvent(
-                    Historia.getEncontroIdosoDescricao(),
-                    Historia.getEncontroIdosoOpcoes(),
-                    Historia::getRespostaEncontroIdoso,
-                    (escolha) -> {
-                        switch (escolha) {
-                            case 1 -> jogador.getInventario().adicionarItem(new PocaoCura(1));
-                            case 2 -> jogador.aplicarVida(-5);
-                            case 3 -> jogador.aplicarVida(-10);
+                historyEvent(
+                        Historia.getEncontroIdosoDescricao(),
+                        Historia.getEncontroIdosoOpcoes(),
+                        Historia::getRespostaEncontroIdoso,
+                        (escolha) -> {
+                            switch (escolha) {
+                                case 1 -> jogador.getInventario().adicionarItem(new PocaoCura(1));
+                                case 2 -> jogador.aplicarVida(-5);
+                                case 3 -> jogador.aplicarVida(-10);
+                            }
                         }
-                    }
-            );
+                );
+            }
+
+            if(gameAct == 2){
+                historyEvent(
+                        Historia.getEncontroBifurcacao(),
+                        Historia.getEncontroBifurcacaoOpcoes(),
+                        Historia::getRespostaEncontroBifurcacao,
+                        (escolha) -> {
+                            switch (escolha) {
+                                case 1 -> jogador.getInventario().adicionarItem(new Bomba(1));
+                                case 2 -> jogador.aplicarVida(-100);
+                            }
+                        }
+                );
+            }
 
             return;
         }
@@ -566,6 +586,4 @@ public class  Jogo {
 
         }
     }
-
-
 }
