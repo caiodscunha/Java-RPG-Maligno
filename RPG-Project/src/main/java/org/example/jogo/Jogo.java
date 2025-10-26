@@ -161,7 +161,7 @@ public class  Jogo {
         switch (gameAct) {
             case 1 -> encontros = new String[]{"Slime", "Esqueleto", "Zumbi"};
             case 2 -> encontros = new String[]{"Morcego", "Fantasma", "Aranha"};
-            case 3 -> encontros = new String[]{"Inimigo"};
+            case 3 -> encontros = new String[]{"Olho Demoníaco", "Demônio", "Ceifador"};
         }
     }
 
@@ -401,6 +401,9 @@ public class  Jogo {
             case "Aranha" -> new Aranha(level);
             case "Fantasma" -> new Fantasma(level);
             case "Morcego" -> new Morcego(level);
+            case "Demônio" -> new Demonio(level);
+            case "Olho Demoníaco" -> new OlhoDemoniaco(level);
+            case "Ceifador" -> new Ceifador(level);
             default -> new Inimigo("Inimigo Desconhecido", level);
         };
     }
