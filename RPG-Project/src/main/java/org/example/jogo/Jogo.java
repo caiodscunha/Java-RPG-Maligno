@@ -6,9 +6,7 @@ import org.example.models.inventario.Inventario;
 import org.example.models.itens.Item;
 import org.example.models.itens.itens.dano.Bomba;
 import org.example.models.itens.itens.cura.PocaoCuraPequena;
-import org.example.models.personagens.inimigos.comuns.Esqueleto;
-import org.example.models.personagens.inimigos.comuns.Slime;
-import org.example.models.personagens.inimigos.comuns.Zumbi;
+import org.example.models.personagens.inimigos.comuns.*;
 import org.example.models.personagens.inimigos.inimigo.Inimigo;
 import org.example.models.personagens.players.classes.Arqueiro;
 import org.example.models.personagens.players.classes.Guerreiro;
@@ -69,9 +67,9 @@ public class  Jogo {
 
     //Metodo para printar os títulos
     public static void printHeading(String header){
-        printSeparator(30);
+        printSeparator(60);
         System.out.println(header);
-        printSeparator(30);
+        printSeparator(60);
 
     }
 
@@ -161,8 +159,9 @@ public class  Jogo {
 
     private static void loadInimigos(){
         switch (gameAct) {
-            case 1 -> encontros = new String[]{"Esqueleto", "Zumbi", "Slime"};
-            case 2 -> encontros = new String[]{"Inimigo"};
+            case 1 -> encontros = new String[]{"Slime", "Esqueleto", "Zumbi"};
+            case 2 -> encontros = new String[]{"Morcego", "Fantasma", "Aranha"};
+            case 3 -> encontros = new String[]{"Inimigo"};
         }
     }
 
@@ -399,6 +398,9 @@ public class  Jogo {
             case "Esqueleto" -> new Esqueleto(level);
             case "Slime" -> new Slime(level);
             case "Zumbi" -> new Zumbi(level);
+            case "Aranha" -> new Aranha(level);
+            case "Fantasma" -> new Fantasma(level);
+            case "Morcego" -> new Morcego(level);
             default -> new Inimigo("Inimigo Desconhecido", level);
         };
     }
@@ -561,12 +563,12 @@ public class  Jogo {
     private static void printBattleHud(Inimigo inimigo) {
         printHeading("BATALHA - " + places[place]);
         System.out.println(inimigo.toString());
-        printSeparator(30);
+        printSeparator(60);
         System.out.println(inimigo.inimigoAsciiArt());
 
-        printSeparator(30);
+        printSeparator(60);
         System.out.println(jogador.toString());
-        printSeparator(30);
+        printSeparator(60);
         System.out.print(
                 """
                 (1) Lutar
