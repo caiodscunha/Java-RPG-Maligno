@@ -163,4 +163,123 @@ public class Historia {
             default -> "";
         };
     }
+
+    public static void printThirdAct() {
+        Jogo.clearConsole();
+        Jogo.printHeading("Terceiro Ato");
+        System.out.println("Você sente que andou em circulos, você encontra o que aparenta ser a mesma escada que usou para descer");
+        Jogo.anythingToContinue();
+
+        Jogo.clearConsole();
+        Jogo.printHeading("Escadaria da Masmorra");
+        System.out.println("Você tenta entender como chegou a escada novamente, o caminho em sua cabeça não faz sentido.");
+        System.out.println("Antes de subir as escadas você decide dar uma olhada no local, será que realmente aquela é a mesma escada?");
+        System.out.println("O único caminho realmente é subir as escadas, você começa a subir e agora tem certeza, aquela não é a mesma escadaria.");
+        System.out.println("Você sente um alivio inicial de saber que aquelas escadas provavelmente levam a saída, um sentimento de missão cumprida preenche seu ser.");
+        Jogo.anythingToContinue();
+    }
+
+    public static String getVoltarEscadaria() {
+        return """
+                O sentimento de missão cumprida não dura muito, seu corpo é tomado por medo. O que você deseja fazer?
+                """;
+    }
+
+    public static List<String> getVoltarEscadariaOpcoes() {
+        return List.of(
+                "Descer as escadas e buscar uma nova saída.",
+                "Seguir pelas escadas e enfrentar o medo que sente."
+        );
+    }
+
+    public static String getRespostaVoltarEscadaria(int escolha) {
+        return switch (escolha) {
+            case 1 -> """
+                   Você decide descer as escadas. 
+                   Conforme se vira para descer, um ser misterioso surge.
+                   Ele tem uma velocidade assustadora.
+                   Você desvia no ultimo segundo.
+                   Aquele golpe teria sido fatal, ele some na escuridão.
+                   Aquele é o aviso que o único caminho é subir as escadas.
+                   Você desiste de descer e sai apenas com um arranhão.
+                   (Você perde 30 pontos de vida)
+                    """;
+            case 2 -> """
+                   Você decide continuar subindo as escadas. 
+                   A cada passo o medo aumenta, mas voltar significa desistir de sair.
+                   Você se prepara para o combate.
+                   (Nada acontece)
+                    """;
+            default -> "";
+        };
+    }
+
+    public static void printFourthAct() {
+        Jogo.clearConsole();
+        Jogo.printHeading("Quarto Ato");
+        System.out.println("Você chegou a saída da masmorra, um ser familiar espreita a saída");
+        Jogo.anythingToContinue();
+
+        Jogo.clearConsole();
+        Jogo.printHeading("Saida assombrada");
+        System.out.println("Você olha bem e percebe, é o mesmo velho que estava na entrada.");
+        System.out.println("Você repara e ve que a saída não é o memsmo local de entrada.");
+        System.out.println("Como ele foi parar ali?");
+        System.out.println("Ele olha pra você, você sente um calafrio que nunca antes sentiu.");
+        System.out.println("Nada naquela masmorra te fez sentir tanto medo quanto o olhar do velho.");
+        Jogo.anythingToContinue();
+    }
+
+    public static String getVelhoPerguntaFinal() {
+        return """
+            O velho encara você em silêncio por alguns segundos.
+            Então, com uma voz rouca e profunda, ele pergunta:
+            
+            "O que você realmente buscava ao desafiar esta masmorra?"
+            """;
+    }
+
+    public static List<String> getVelhoPerguntaFinalOpcoes() {
+        return List.of(
+                "Melhorar minhas habilidades para proteger aqueles que são importantes para mim.",
+                "Queria apenas uma aventura, mas agora o único desejo é sair vivo daqui.",
+                "Riquezas e glória! Nada nesse mundo importa mais que riquezas!"
+
+        );
+    }
+
+    public static String getRespostaVelhoPerguntaFinal(int escolha) {
+        return switch (escolha) {
+            case 1 -> """
+                O velho observa você em silêncio... e um leve sorriso aparece em seu rosto.
+                "Talvez ainda haja esperança em você."
+                Um brilho dourado envolve seu corpo.
+                (Você é abençoado e recupera 100 pontos de vida)
+                
+                Eu realmente não queria ter que fazer isso com você...
+                (O velho se transforma em um esqueleto gigante!)
+                """;
+
+            case 2 -> """
+                O velho abaixa a cabeça lentamente.
+                "A força sem propósito é destruição."
+                Ele levanta o cajado — o chão treme, e uma energia sombria toma conta do local.
+                (O velho se transforma em um esqueleto gigante!)
+                """;
+
+            case 3 -> """
+                O velho começa a rir, alto e sinistro.
+                "Hahaha... então você entendeu menos do que eu pensava!"
+                As chamas da masmorra o envolvem.
+                Uma dor intensa invade seu corpo.
+                (Você perde 100 pontos de vida)
+                
+                Você escolheu isso!
+                (O velho se transforma em um esqueleto gigante!)
+                """;
+
+            default -> "";
+        };
+    }
+
 }

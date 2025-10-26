@@ -29,7 +29,7 @@ public class  Jogo {
     private static int place = 0;
 
     private static boolean primeiraExploracaoFeita = false;
-    private static String[] places = {"Entrada da masmorra", "Profundezas da masmorra", "Labubu land", "Saida assombrada"};
+    private static String[] places = {"Entrada da masmorra", "Profundezas da masmorra", "Escadaria da masmorra", "Saida assombrada"};
 
     private static String[] encontros = {"Esqueleto"};
 
@@ -264,7 +264,25 @@ public class  Jogo {
             place = 2;
 
             loadInimigos();
+            scanner.nextLine();
+            Historia.printThirdAct();
             //mudar o ato da história e settar o array de encontros
+        }else if(jogador.getNivel() >= 12 && gameAct == 3){
+            clearConsole();
+            System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
+            int option = readInt("(1)Sim\n(2)Não\n->", 2);
+            if(option == 1){
+                Save save = new Save(jogador, gameAct, primeiraExploracaoFeita);
+                SaveManager.salvar(jogador.getNome(), save);
+
+            }
+
+            primeiraExploracaoFeita = false;
+            gameAct = 4;
+            place = 3;
+
+            scanner.nextLine();
+            Historia.printFourthAct();
         }
     }
 
@@ -307,6 +325,33 @@ public class  Jogo {
                             switch (escolha) {
                                 case 1 -> jogador.getInventario().adicionarItem(new Bomba(1));
                                 case 2 -> jogador.aplicarVida(-100);
+                            }
+                        }
+                );
+            }
+
+            if(gameAct == 3){
+                historyEvent(
+                        Historia.getVoltarEscadaria(),
+                        Historia.getVoltarEscadariaOpcoes(),
+                        Historia::getRespostaVoltarEscadaria,
+                        (escolha) -> {
+                            if (escolha == 1) {
+                                jogador.aplicarVida(-30);
+                            }
+                        }
+                );
+            }
+
+            if(gameAct == 4){
+                historyEvent(
+                        Historia.getVelhoPerguntaFinal(),
+                        Historia.getVelhoPerguntaFinalOpcoes(),
+                        Historia::getRespostaVelhoPerguntaFinal,
+                        (escolha) -> {
+                            switch (escolha) {
+                                case 1 -> jogador.aplicarVida(100);
+                                case 3 -> jogador.aplicarVida(-100);
                             }
                         }
                 );
