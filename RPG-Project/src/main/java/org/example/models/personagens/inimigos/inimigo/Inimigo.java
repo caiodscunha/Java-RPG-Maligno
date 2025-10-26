@@ -1,8 +1,7 @@
 package org.example.models.personagens.inimigos.inimigo;
 
-import org.example.models.itens.itens.PocaoCura;
+import org.example.models.itens.itens.cura.PocaoCuraPequena;
 import org.example.models.personagens.personagem.Personagem;
-import org.example.models.personagens.players.player.Player;
 
 public class Inimigo extends Personagem implements Cloneable{
 
@@ -17,7 +16,7 @@ public class Inimigo extends Personagem implements Cloneable{
 
     public void inventarioAleatorio(){
         int randomChance1 = (int)(Math.random()*2 + 1);
-        this.inventario.adicionarItem(new PocaoCura(randomChance1));
+        this.inventario.adicionarItem(new PocaoCuraPequena(randomChance1));
     }
 
     public String inimigoAsciiArt(){

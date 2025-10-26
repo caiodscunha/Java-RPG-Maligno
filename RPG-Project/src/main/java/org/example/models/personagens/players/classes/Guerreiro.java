@@ -1,9 +1,7 @@
 package org.example.models.personagens.players.classes;
 
-import org.example.models.inventario.Inventario;
-import org.example.models.itens.itens.Bomba;
-import org.example.models.itens.itens.PocaoCura;
-import org.example.models.personagens.personagem.Personagem;
+import org.example.models.itens.itens.dano.Bomba;
+import org.example.models.itens.itens.cura.PocaoCuraPequena;
 import org.example.models.personagens.players.player.Player;
 
 public class Guerreiro extends Player {
@@ -16,8 +14,7 @@ public class Guerreiro extends Player {
         this.pontosVida = 100;
         this.ataque = 5;
         this.defensa = 10;
-        this.inventario.adicionarItem(new PocaoCura(2));
-        this.inventario.adicionarItem(new Bomba(3));
+        this.inventario.adicionarItem(new PocaoCuraPequena(2));
     }
 
     @Override

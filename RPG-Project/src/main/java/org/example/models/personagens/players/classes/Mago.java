@@ -1,7 +1,7 @@
 package org.example.models.personagens.players.classes;
 
-import org.example.models.inventario.Inventario;
-import org.example.models.personagens.personagem.Personagem;
+import org.example.models.itens.itens.cura.PocaoCuraMedia;
+import org.example.models.itens.itens.dano.Molotov;
 import org.example.models.personagens.players.player.Player;
 
 public class Mago extends Player {
@@ -13,6 +13,8 @@ public class Mago extends Player {
         this.pontosVida = 50;
         this.ataque = 10;
         this.defensa = 7;
+        this.inventario.adicionarItem(new PocaoCuraMedia(2));
+        this.inventario.adicionarItem(new Molotov(1));
     }
 
     @Override

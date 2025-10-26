@@ -4,9 +4,11 @@ import org.example.models.efeitos.efeitos.EfeitoCura;
 import org.example.models.efeitos.efeitos.EfeitoDano;
 import org.example.models.inventario.Inventario;
 import org.example.models.itens.Item;
-import org.example.models.itens.itens.Bomba;
-import org.example.models.itens.itens.PocaoCura;
-import org.example.models.personagens.inimigos.Esqueleto;
+import org.example.models.itens.itens.dano.Bomba;
+import org.example.models.itens.itens.cura.PocaoCuraPequena;
+import org.example.models.personagens.inimigos.comuns.Esqueleto;
+import org.example.models.personagens.inimigos.comuns.Slime;
+import org.example.models.personagens.inimigos.comuns.Zumbi;
 import org.example.models.personagens.inimigos.inimigo.Inimigo;
 import org.example.models.personagens.players.classes.Arqueiro;
 import org.example.models.personagens.players.classes.Guerreiro;
@@ -31,7 +33,7 @@ public class  Jogo {
     private static boolean primeiraExploracaoFeita = false;
     private static String[] places = {"Entrada da masmorra", "Profundezas da masmorra", "Escadaria da masmorra", "Saida assombrada"};
 
-    private static String[] encontros = {"Esqueleto"};
+    private static String[] encontros = {"Esqueleto", "Zumbi", "Slime"};
 
     //Metodo estático para printar opções e ler a selecionada
     public static int readInt(String prompt, int userChoices) {
@@ -159,7 +161,7 @@ public class  Jogo {
 
     private static void loadInimigos(){
         switch (gameAct) {
-            case 1 -> encontros = new String[]{"Esqueleto"};
+            case 1 -> encontros = new String[]{"Esqueleto", "Zumbi", "Slime"};
             case 2 -> encontros = new String[]{"Inimigo"};
         }
     }
@@ -308,7 +310,7 @@ public class  Jogo {
                         Historia::getRespostaEncontroIdoso,
                         (escolha) -> {
                             switch (escolha) {
-                                case 1 -> jogador.getInventario().adicionarItem(new PocaoCura(1));
+                                case 1 -> jogador.getInventario().adicionarItem(new PocaoCuraPequena(1));
                                 case 2 -> jogador.aplicarVida(-5);
                                 case 3 -> jogador.aplicarVida(-10);
                             }
@@ -395,6 +397,8 @@ public class  Jogo {
         // Retorna a nova instância da subclasse com o nível escalonado
         return switch (type) {
             case "Esqueleto" -> new Esqueleto(level);
+            case "Slime" -> new Slime(level);
+            case "Zumbi" -> new Zumbi(level);
             default -> new Inimigo("Inimigo Desconhecido", level);
         };
     }
@@ -430,7 +434,7 @@ public class  Jogo {
                         }
                     } else {
                         System.out.println("O baú continha algo útil! Você encontra uma Poção de Cura.");
-                        jogador.getInventario().adicionarItem(new PocaoCura(1));
+                        jogador.getInventario().adicionarItem(new PocaoCuraPequena(1));
                     }
                 } else {
                     System.out.println("Você decide ignorar o baú e segue em frente.");
