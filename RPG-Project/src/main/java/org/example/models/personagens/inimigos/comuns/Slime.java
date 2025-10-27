@@ -7,11 +7,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class Slime extends Inimigo {
 
     public Slime(int nivel) {
-        super("Slime", nivel);
-        this.maxPontosVida = 15 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 5 + nivel;
-        this.defensa = 1 + nivel;
+        super("Slime", nivel,  15 + 2*nivel, 4+nivel, 10+nivel);
+
         this.inventarioAleatorio();
 
     }

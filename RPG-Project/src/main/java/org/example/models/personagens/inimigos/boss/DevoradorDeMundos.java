@@ -6,11 +6,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 
 public class DevoradorDeMundos extends Inimigo {
     public DevoradorDeMundos(int nivel) {
-        super("DevoradorDeMundos", nivel);
-        this.maxPontosVida = 75 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 8 + nivel;
-        this.defensa = 2 + nivel;
+        super("Devorador de Mundos", nivel,  75 + 2*nivel, 8+nivel, 10+nivel);
+
         this.inventarioAleatorio();
 
     }

@@ -7,11 +7,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class Fantasma extends Inimigo {
 
     public Fantasma(int nivel) {
-        super("Fantasma", nivel);
-        this.maxPontosVida = 30 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 8 + nivel;
-        this.defensa = 6 + nivel;
+        super("Fantasma", nivel,  30 + 2*nivel, 6+nivel, 12+nivel);
+
         this.inventarioAleatorio();
 
     }

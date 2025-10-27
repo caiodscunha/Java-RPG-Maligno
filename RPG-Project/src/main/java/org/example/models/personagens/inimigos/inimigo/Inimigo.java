@@ -6,8 +6,8 @@ import org.example.models.personagens.personagem.Personagem;
 public class Inimigo extends Personagem implements Cloneable{
 
 
-    public Inimigo(String nome, int nivel) {
-        super(nome, nivel);
+    public Inimigo(String nome, int nivel, int maxPontosVida, int ataque, int defensa) {
+        super(nome, nivel,  maxPontosVida, ataque, defensa);
     }
 
     public Inimigo(Inimigo inimigo) {

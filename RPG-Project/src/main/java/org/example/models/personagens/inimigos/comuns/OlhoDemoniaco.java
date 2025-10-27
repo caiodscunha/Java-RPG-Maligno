@@ -8,11 +8,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class OlhoDemoniaco extends Inimigo {
 
     public OlhoDemoniaco(int nivel) {
-        super("Olho Demoníaco", nivel);
-        this.maxPontosVida = 20 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 7 + nivel;
-        this.defensa = 5 + nivel;
+        super("Olho Demoníaco", nivel,  20 + 2*nivel, 5+nivel, 12+nivel);
+
         this.inventarioAleatorio();
 
     }

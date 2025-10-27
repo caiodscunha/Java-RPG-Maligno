@@ -8,11 +8,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class Morcego extends Inimigo {
 
     public Morcego(int nivel) {
-        super("Morcego", nivel);
-        this.maxPontosVida = 20 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 4 + nivel;
-        this.defensa = 3 + nivel;
+        super("Morcego", nivel,  20 + 2*nivel, 4+nivel, 10+nivel);
+
         this.inventarioAleatorio();
 
     }

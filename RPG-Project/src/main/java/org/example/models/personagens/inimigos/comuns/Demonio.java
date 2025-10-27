@@ -9,11 +9,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class Demonio extends Inimigo {
 
     public Demonio(int nivel) {
-        super("Demônio", nivel);
-        this.maxPontosVida = 25 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 10 + nivel;
-        this.defensa = 5 + nivel;
+        super("Demônio", nivel,  25 + 2*nivel, 8+nivel, 12+nivel);
+
         this.inventarioAleatorio();
 
     }

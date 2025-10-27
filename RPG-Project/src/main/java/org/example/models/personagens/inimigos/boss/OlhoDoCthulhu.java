@@ -6,11 +6,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 
 public class OlhoDoCthulhu extends Inimigo {
     public OlhoDoCthulhu(int nivel) {
-        super("OlhoDoCthulhu", nivel);
-        this.maxPontosVida = 55 + 2 * nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 7 + nivel;
-        this.defensa = 2 + nivel;
+        super("Olho do Cthulhu", nivel,  55 + 2*nivel, 9+nivel, 8+nivel);
+
         this.inventarioAleatorio();
     }
 

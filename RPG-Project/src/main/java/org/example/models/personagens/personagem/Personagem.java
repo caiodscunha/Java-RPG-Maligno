@@ -16,10 +16,12 @@ public abstract class Personagem implements Cloneable, Serializable {
 
     protected Inventario inventario;
 
-    public Personagem(String nome, int nivel) {
+    public Personagem(String nome, int nivel, int maxPontosVida, int ataque, int defensa) {
         this.nome = nome;
-        this.pontosVida = 1;
-        this.maxPontosVida = 1;
+        this.pontosVida = maxPontosVida;
+        this.maxPontosVida = maxPontosVida;
+        this.ataque = ataque;
+        this.defensa = defensa;
         this.nivel = nivel;
         this.inventario = new Inventario();
     }
@@ -47,14 +49,18 @@ public abstract class Personagem implements Cloneable, Serializable {
     }
 
     public int rolarAtaque(){
-        return this.ataque + ((int)(Math.random()*10 + 1));
+        return this.ataque + ((int)(Math.random()*20 + 1));
     }
 
-    public void tomarDano(Personagem personagem){
+    public void tomarDano(Personagem personagem) {
         int ataque = personagem.rolarAtaque();
         int dano = ataque - this.defensa;
 
-        if(dano <= 0) return;
+        if(dano <= 0) {
+            System.out.println(this.nome + " desviou do ataque...");
+            return;
+        }
+        System.out.println(this.nome + " tomou "+ dano +" de dano...");
 
         this.pontosVida = (dano > this.pontosVida) ? 0 : this.pontosVida - dano;
 
@@ -81,7 +87,7 @@ public abstract class Personagem implements Cloneable, Serializable {
     public String toString() {
         String nomeFormatado = this.nome.replaceAll("([a-z])([A-Z])", "$1 $2");
 
-        return " | " + nomeFormatado + " | "
+        return nomeFormatado + " | "
                 + "HP: " + this.pontosVida + "/" + this.maxPontosVida
                 + " | LV: " + this.nivel;
     }

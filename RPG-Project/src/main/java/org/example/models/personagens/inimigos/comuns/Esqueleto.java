@@ -7,11 +7,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class Esqueleto extends Inimigo {
 
     public Esqueleto(int nivel) {
-        super("Esqueleto", nivel);
-        this.maxPontosVida = 20 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 8 + nivel;
-        this.defensa = 3 + nivel;
+        super("Esqueleto", nivel,  20 + 2*nivel, 5+nivel, 14+nivel);
+
         this.inventarioAleatorio();
 
     }

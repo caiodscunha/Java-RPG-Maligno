@@ -11,18 +11,14 @@ public class Arqueiro extends Player {
 
 
     public Arqueiro(String nome) {
-        super(nome, 1);
+        super(nome, 1,  80, 7, 16);
 
-        this.pontosVida = 70;
-        this.maxPontosVida = 70;
-        this.ataque = 7;
-        this.defensa = 8;
         this.inventario.adicionarItem(new PocaoCuraPequena(2));
         this.inventario.adicionarItem(new FacaDeArremeco(3));
     }
 
     @Override
     public String toString() {
-        return "Arqueiro" + super.toString();
+        return "Arqueiro | " + super.toString();
     }
 }

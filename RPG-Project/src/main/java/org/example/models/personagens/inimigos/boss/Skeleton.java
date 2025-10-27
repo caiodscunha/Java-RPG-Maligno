@@ -6,11 +6,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 
 public class Skeleton extends Inimigo {
     public Skeleton(int nivel) {
-        super("Skeleton", nivel);
-        this.maxPontosVida = 100 + 2 * nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 10 + nivel;
-        this.defensa = 2 + nivel;
+        super("Skeleton", nivel,  100 + 2*nivel, 7+nivel, 8+nivel);
+
         this.inventarioAleatorio();
     }
 

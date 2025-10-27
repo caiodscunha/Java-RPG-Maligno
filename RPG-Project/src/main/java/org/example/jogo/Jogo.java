@@ -74,7 +74,7 @@ public class  Jogo {
     }
 
     public static void anythingToContinue(){
-        System.out.print("Aperte qualquer coisa para continuar...");
+        System.out.print("\nAperte qualquer coisa para continuar...");
         scanner.nextLine();
     }
 
@@ -83,11 +83,20 @@ public class  Jogo {
 
         while(input != 3){
             clearConsole();
-            printSeparator(40);
-            System.out.println("N O M E   D O   J O G O");
+            printSeparator(130);
+            System.out.println("""
+                     ▄████████    ▄████████ ▄██   ▄      ▄████████     ███        ▄████████  ▄█          ▄████████  ▄██████▄   ▄██████▄      ███    \s
+                    ███    ███   ███    ███ ███   ██▄   ███    ███ ▀█████████▄   ███    ███ ███         ███    ███ ███    ███ ███    ███ ▀█████████▄\s
+                    ███    █▀    ███    ███ ███▄▄▄███   ███    █▀     ▀███▀▀██   ███    ███ ███         ███    ███ ███    ███ ███    ███    ▀███▀▀██\s
+                    ███         ▄███▄▄▄▄██▀ ▀▀▀▀▀▀███   ███            ███   ▀   ███    ███ ███        ▄███▄▄▄▄██▀ ███    ███ ███    ███     ███   ▀\s
+                    ███        ▀▀███▀▀▀▀▀   ▄██   ███ ▀███████████     ███     ▀███████████ ███       ▀▀███▀▀▀▀▀   ███    ███ ███    ███     ███    \s
+                    ███    █▄  ▀███████████ ███   ███          ███     ███       ███    ███ ███       ▀███████████ ███    ███ ███    ███     ███    \s
+                    ███    ███   ███    ███ ███   ███    ▄█    ███     ███       ███    ███ ███▌    ▄   ███    ███ ███    ███ ███    ███     ███    \s
+                    ████████▀    ███    ███  ▀█████▀   ▄████████▀     ▄████▀     ███    █▀  █████▄▄██   ███    ███  ▀██████▀   ▀██████▀     ▄████▀  \s
+                                 ███    ███                                                 ▀           ███    ███                                  \s""");
             System.out.println("\nCriadoares: ");
             System.out.println("\tCaio Cunha\n\tGuilherme Piovezan");
-            printSeparator(40);
+            printSeparator(130);
 
             System.out.println("(1) Nova Jornada");
             System.out.println("(2) Carregar Save");
@@ -292,6 +301,16 @@ public class  Jogo {
             scanner.nextLine();
             Historia.printFourthAct();
 
+        } else if (gameAct == 4 && primeiraExploracaoFeita) {
+
+            clearConsole();
+            System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
+            int option = readInt("(1)Sim\n(2)Não\n->", 2);
+            if(option == 1){
+                Save save = new Save(jogador, gameAct, primeiraExploracaoFeita);
+                SaveManager.salvar(jogador.getNome(), save);
+            }
+
             bossFight(4);
 
             historyEvent(
@@ -309,6 +328,7 @@ public class  Jogo {
                     }
             );
             isRunning = false;
+
         }
     }
 
@@ -429,7 +449,7 @@ public class  Jogo {
             case "Demônio" -> new Demonio(level);
             case "Olho Demoníaco" -> new OlhoDemoniaco(level);
             case "Ceifador" -> new Ceifador(level);
-            default -> new Inimigo("Inimigo Desconhecido", level);
+            default -> new Inimigo("Inimigo Desconhecido", level, 22+2*level, 5, 5);
         };
     }
 
@@ -440,7 +460,7 @@ public class  Jogo {
         if (chance < 70) { // 70% de chance
             int enemyIndex = (int)(Math.random() * encontros.length);
             Inimigo inimigo = createEnemy(encontros[enemyIndex], jogador.getNivel());
-            battle(inimigo);
+            battle(inimigo, false);
         } else {
             // Evento aleatório: 70% baú, 30% fogueira
             double eventoChance = Math.random(); // 0.0 a 1.0
@@ -480,7 +500,7 @@ public class  Jogo {
         }
     }
 
-    private static void battle(Inimigo inimigo) {
+    private static void battle(Inimigo inimigo, boolean isBossBattle) {
         int input, xp;
 
         do{
@@ -492,27 +512,41 @@ public class  Jogo {
             switch (input){
                 case 1 -> {
                     inimigo.tomarDano(jogador);
+                    scanner.nextLine();
+                    anythingToContinue();
                     if(!inimigo.isVivo()) break;
                     jogador.tomarDano(inimigo);
+                    anythingToContinue();
                 }
                 case 2 -> {
                     boolean usedItem = usarItemEmCombate(inimigo);
                     if(!usedItem) continue;
                     jogador.tomarDano(inimigo);
+                    anythingToContinue();
                 }
                 default -> {
+                    if(isBossBattle) {
+                        System.out.println("Você Não Tem Para Onde Fugir...");
+                        scanner.nextLine();
+                        anythingToContinue();
+                        jogador.tomarDano(inimigo);
+                        anythingToContinue();
+                        break;
+                    }
                     if(Math.random()*20 < 10){
                         System.out.println("Você Fugiu...");
+                        scanner.nextLine();
                         anythingToContinue();
                         return;
                     }
                     System.out.println("Você falha ao fugir...");
+                    scanner.nextLine();
                     anythingToContinue();
                     jogador.tomarDano(inimigo);
                 }
             }
 
-            scanner.nextLine();
+
 
         }while (inimigo.isVivo() && jogador.isVivo());
 
@@ -690,7 +724,7 @@ public class  Jogo {
         scanner.nextLine();
         anythingToContinue();
 
-        battle(boss);
+        battle(boss, true);
 
     }
 

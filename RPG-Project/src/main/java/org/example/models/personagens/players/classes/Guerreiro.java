@@ -8,17 +8,13 @@ public class Guerreiro extends Player {
 
 
     public Guerreiro(String nome) {
-        super(nome, 1);
+        super(nome, 1,  100, 5, 18);
 
-        this.maxPontosVida = 100;
-        this.pontosVida = 100;
-        this.ataque = 150;
-        this.defensa = 10;
         this.inventario.adicionarItem(new PocaoCuraPequena(2));
     }
 
     @Override
     public String toString() {
-        return "Guerreiro" + super.toString();
+        return "Guerreiro | " + super.toString();
     }
 }

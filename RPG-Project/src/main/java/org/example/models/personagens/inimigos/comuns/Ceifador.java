@@ -7,11 +7,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class Ceifador extends Inimigo {
 
     public Ceifador(int nivel) {
-        super("Ceifador", nivel);
-        this.maxPontosVida = 30 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 8 + nivel;
-        this.defensa = 5 + nivel;
+        super("Ceifador", nivel,  30 + 2*nivel, 9+nivel, 11+nivel);
+
         this.inventarioAleatorio();
 
     }

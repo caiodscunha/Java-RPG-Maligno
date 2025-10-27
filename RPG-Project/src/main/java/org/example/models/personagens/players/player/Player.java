@@ -9,8 +9,8 @@ public class Player extends Personagem implements Serializable {
     protected int xp;
     protected int xpToNextLevel;
 
-    public Player(String nome, int nivel) {
-        super(nome, nivel);
+    public Player(String nome, int nivel, int maxPontosVida, int ataque, int defensa) {
+        super(nome, nivel,  maxPontosVida, ataque, defensa);
         this.xp = 0;
         this.xpToNextLevel = 10;
     }
@@ -25,6 +25,7 @@ public class Player extends Personagem implements Serializable {
 
     public void upar(int xp){
         int tempXp = this.xp + xp;
+        int oldMaxPontosVida = this.maxPontosVida;
 
         while (tempXp >= this.xpToNextLevel){
             tempXp = tempXp - this.xpToNextLevel;
@@ -34,7 +35,7 @@ public class Player extends Personagem implements Serializable {
             this.ataque++;
             this.defensa++;
         }
-        this.pontosVida = this.maxPontosVida;
+        this.pontosVida += this.maxPontosVida-oldMaxPontosVida;
         this.xp = tempXp;
     }
 

@@ -6,11 +6,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class Zumbi extends Inimigo {
 
     public Zumbi(int nivel) {
-        super("Zumbi", nivel);
-        this.maxPontosVida = 25 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 10 + nivel;
-        this.defensa = 4 + nivel;
+        super("Zumbi", nivel,  25 + 2*nivel, 5+nivel, 14+nivel);
+
         this.inventarioAleatorio();
 
     }

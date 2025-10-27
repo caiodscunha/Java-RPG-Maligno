@@ -8,11 +8,8 @@ import org.example.models.personagens.inimigos.inimigo.Inimigo;
 public class Aranha extends Inimigo {
 
     public Aranha(int nivel) {
-        super("Aranha", nivel);
-        this.maxPontosVida = 25 + 2*nivel;
-        this.pontosVida = this.maxPontosVida;
-        this.ataque = 10 + nivel;
-        this.defensa = 2 + nivel;
+        super("Aranha", nivel,  25 + 2*nivel, 5+nivel, 12+nivel);
+
         this.inventarioAleatorio();
 
     }
