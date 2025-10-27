@@ -1,4 +1,6 @@
-package org.example.jogo;
+package org.example;
+
+import org.example.jogo.Jogo;
 
 public class Main {
     public static void main(String[] args) {
