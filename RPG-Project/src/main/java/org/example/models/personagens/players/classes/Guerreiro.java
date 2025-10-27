@@ -12,7 +12,7 @@ public class Guerreiro extends Player {
 
         this.maxPontosVida = 100;
         this.pontosVida = 100;
-        this.ataque = 5;
+        this.ataque = 150;
         this.defensa = 10;
         this.inventario.adicionarItem(new PocaoCuraPequena(2));
     }

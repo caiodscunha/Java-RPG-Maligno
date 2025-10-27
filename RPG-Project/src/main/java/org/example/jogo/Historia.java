@@ -282,4 +282,167 @@ public class Historia {
         };
     }
 
+    public static String getEscolhaFinal() {
+        return """
+            O corpo do Skeleton se desfaz em pó, 
+            revelando um estranho cristal flutuando diante de você.
+            
+            Ele pulsa com uma energia antiga... 
+            a mesma energia que dominava toda a masmorra.
+            
+            A voz do velho ecoa em sua mente uma última vez:
+            "O poder que você buscava agora é seu... 
+             Mas... saberá usá-lo?"
+            
+            Você sente duas forças dentro de si: 
+            uma pede para destruir o cristal, 
+            a outra, para aceitá-lo.
+            
+            O que você faz?
+            """;
+    }
+
+    public static List<String> getEscolhaFinalOpcoes() {
+        return List.of(
+                "Destruir o cristal.",
+                "Absorver o poder."
+        );
+    }
+
+    public static String getRespostaEscolhaFinal(int escolha) {
+        return switch (escolha) {
+            case 1 -> """
+                Você levanta sua arma e golpeia o cristal com toda sua força.
+                Uma luz intensa explode pelo salão.
+                
+                Quando a claridade se dissipa, o cristal desapareceu...
+                e com ele, a maldição da masmorra.
+                
+                Você cai de joelhos, exausto, mas vivo.
+                O ar ao seu redor está leve. A paz finalmente voltou.
+                
+                (O ciclo foi encerrado)
+                """;
+            case 2 -> """
+                Você estende a mão e toca o cristal.
+                Uma energia sombria percorre seu corpo — dor e poder se misturam.
+                
+                Sua visão escurece... você sente o mundo ao seu redor desaparecer.
+                Quando abre os olhos novamente, tudo é escuridão.
+                
+                Sua consciência está presa.
+                Agora, você é o novo Devorador de Mundos.
+                
+                (O ciclo recomeça)
+                """;
+            default -> "";
+        };
+    }
+
+    public static void printFinal(boolean finalBom) {
+        Jogo.clearConsole();
+
+        if (finalBom) {
+            Jogo.printHeading("O Último Suspiro");
+
+            System.out.println("""
+                O brilho do cristal desaparece...
+                A energia sombria que antes dominava o salão se dissipa lentamente.
+                O silêncio toma conta — um silêncio diferente, cheio de paz.
+
+                As paredes da masmorra começam a ruir, mas agora não há medo.
+                Você sente que cumpriu seu destino.
+                """);
+
+            Jogo.anythingToContinue();
+            Jogo.clearConsole();
+
+            Jogo.printHeading("O Fim da Maldição");
+
+            System.out.println("""
+                Conforme corre para fora, o ar se torna leve.
+                O sol toca sua pele e você sente, pela primeira vez, o peso da vida — e não da luta.
+                Atrás de você, a masmorra se desfaz, como poeira levada pelo vento.
+                
+                O velho, ou talvez apenas sua memória, sussurra:
+                "Você escolheu o caminho certo..."
+                """);
+
+            Jogo.anythingToContinue();
+            Jogo.clearConsole();
+
+            Jogo.printHeading("O Novo Amanhecer");
+
+            System.out.println("""
+                O deserto volta ao silêncio.
+                Nenhuma sombra, nenhum sussurro, apenas o som do vento e da areia.
+
+                Você olha para o horizonte e entende:
+                o poder não está mais preso — nem você.
+                
+                Talvez o ciclo tenha realmente chegado ao fim.
+                """);
+
+            Jogo.anythingToContinue();
+            Jogo.clearConsole();
+
+            Jogo.printHeading("FIM - O CICLO FOI ENCERRADO");
+            System.out.println("""
+                Obrigado por jogar.
+                
+                Esta jornada chegou ao fim...
+                Mas heróis como você sempre encontrarão novos caminhos.
+
+                (Desenvolvido por Caio Cunha e Guilherme Piovezan)
+                """);
+            Jogo.printSeparator(50);
+            Jogo.anythingToContinue();
+
+        } else {
+            // 🔥 Final Ruim
+            Jogo.printHeading("O Novo Skeleton");
+
+            System.out.println("""
+                A energia do cristal invade seu corpo.
+                A dor é insuportável, mas dentro dela, há poder... e prazer.
+                
+                As paredes da masmorra tremem e, por um instante, tudo se apaga.
+                Quando seus olhos se abrem, não há mais corpo — apenas escuridão.
+                
+                Você sente cada grão de areia, cada pedra... 
+                a masmorra respira com você.
+                """);
+
+            Jogo.anythingToContinue();
+            Jogo.clearConsole();
+
+            Jogo.printHeading("O Ciclo Recomeça");
+
+            System.out.println("""
+                Vozes antigas ecoam em sua mente:
+                "Você destruiu o portador... para se tornar o próximo."
+
+                Lá fora, o deserto silencia novamente.
+                A entrada da masmorra se ergue da areia, intacta.
+
+                Em breve, outro aventureiro chegará.
+                E quando o fizer...
+                você estará esperando.
+                """);
+
+            Jogo.anythingToContinue();
+            Jogo.clearConsole();
+
+            Jogo.printHeading("FIM - O CICLO CONTINUA");
+            System.out.println("""
+                A maldição nunca foi quebrada.
+                Ela apenas mudou de nome.
+
+                (Desenvolvido por Caio Cunha e Guilherme Piovezan)
+                """);
+            Jogo.printSeparator(50);
+            Jogo.anythingToContinue();
+        }
+    }
+
 }

@@ -230,6 +230,7 @@ public class  Jogo {
 
     private static void checkAct() {
         if(jogador.getNivel() >= 5 && gameAct == 1){
+
             clearConsole();
             System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
             int option = readInt("(1)Sim\n(2)Não\n->", 2);
@@ -239,7 +240,7 @@ public class  Jogo {
 
             }
 
-            //TODO: Antes de trocar de ato, tocar a boss fight
+            bossFight(1);
 
             primeiraExploracaoFeita = false;
             gameAct = 2;
@@ -251,6 +252,8 @@ public class  Jogo {
             Historia.printSecondAct();
             //mudar o ato da história e settar o array de encontros
         }else if(jogador.getNivel() >= 8 && gameAct == 2){
+
+
             clearConsole();
             System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
             int option = readInt("(1)Sim\n(2)Não\n->", 2);
@@ -259,6 +262,8 @@ public class  Jogo {
                 SaveManager.salvar(jogador.getNome(), save);
 
             }
+
+            bossFight(2);
 
             primeiraExploracaoFeita = false;
             gameAct = 3;
@@ -269,14 +274,16 @@ public class  Jogo {
             Historia.printThirdAct();
             //mudar o ato da história e settar o array de encontros
         }else if(jogador.getNivel() >= 12 && gameAct == 3){
+
             clearConsole();
             System.out.println("Você chegou em um trecho crítico da história, \ngostaria de salvar?");
             int option = readInt("(1)Sim\n(2)Não\n->", 2);
             if(option == 1){
                 Save save = new Save(jogador, gameAct, primeiraExploracaoFeita);
                 SaveManager.salvar(jogador.getNome(), save);
-
             }
+
+            bossFight(3);
 
             primeiraExploracaoFeita = false;
             gameAct = 4;
@@ -284,6 +291,24 @@ public class  Jogo {
 
             scanner.nextLine();
             Historia.printFourthAct();
+
+            bossFight(4);
+
+            historyEvent(
+                    Historia.getEscolhaFinal(),
+                    Historia.getEscolhaFinalOpcoes(),
+                    Historia::getRespostaEscolhaFinal,
+                    (escolha) -> {
+                        if (escolha == 1) {
+                            // FINAL BOM
+                            Historia.printFinal(true);
+                        } else {
+                            // FINAL RUIM
+                            Historia.printFinal(false);
+                        }
+                    }
+            );
+            isRunning = false;
         }
     }
 
@@ -641,4 +666,32 @@ public class  Jogo {
 
         }
     }
+
+    private static void bossFight(int act) {
+        Inimigo boss = switch (act) {
+            case 1 -> new org.example.models.personagens.inimigos.boss.ReiSlime(jogador.getNivel());
+            case 2 -> new org.example.models.personagens.inimigos.boss.OlhoDoCthulhu(jogador.getNivel());
+            case 3 -> new org.example.models.personagens.inimigos.boss.DevoradorDeMundos(jogador.getNivel());
+            default -> new org.example.models.personagens.inimigos.boss.Skeleton(jogador.getNivel());
+        };
+
+        clearConsole();
+        printHeading("⚔️ BATALHA CONTRA O BOSS ⚔️");
+
+        // Exibe o nome e o nível do boss, igual aos inimigos normais
+        System.out.println(boss.toString());
+        printSeparator(60);
+
+        // Mostra arte ASCII do boss
+        System.out.println(boss.inimigoAsciiArt());
+        printSeparator(60);
+
+        System.out.println("Se prepare para a batalha!");
+        scanner.nextLine();
+        anythingToContinue();
+
+        battle(boss);
+
+    }
+
 }

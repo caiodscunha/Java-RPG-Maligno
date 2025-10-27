@@ -79,8 +79,11 @@ public abstract class Personagem implements Cloneable, Serializable {
 
     @Override
     public String toString() {
-        return " | " + this.nome + " | "
-                + "hp: " + this.pontosVida + "/" + this.maxPontosVida + " | " + "lv: " + this.nivel;
+        String nomeFormatado = this.nome.replaceAll("([a-z])([A-Z])", "$1 $2");
+
+        return " | " + nomeFormatado + " | "
+                + "HP: " + this.pontosVida + "/" + this.maxPontosVida
+                + " | LV: " + this.nivel;
     }
 
     @Override
